@@ -1,0 +1,18 @@
+.expense-container {
+  border: 5px solid black;
+}
+
+.expense-block-subtitle {
+  display: grid;
+  grid-template-columns: auto 80px 100px 100px;
+}
+
+.expense-block {
+  border: 1px solid blue;
+  display: grid;
+  grid-template-columns: auto 80px 100px 100px;
+}
+
+.expense-description {
+  text-align: left;
+}
