@@ -5,7 +5,9 @@ module.exports = {
   findAll() {
     return db.many(`
       SELECT *
-      FROM expenses
+      FROM expenses e
+      INNER JOIN categories c on
+        e.category_id = c.id
       ORDER BY data_created ASC
     `);
   },
@@ -15,12 +17,12 @@ module.exports = {
       SELECT * FROM expenses e
       WHERE e.category_id = $1
     `,id);
-  }
+  },
 
   findById(id) {
     return db.one(`
       SELECT * FROM expenses e
-      INNER JOIN categories c on e.category_id = e.id
+      INNER JOIN categories c on e.category_id = c.id
       WHERE e.id = $1
     `, id);
   },
