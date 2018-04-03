@@ -3,11 +3,7 @@
 Visualize personal finance.
 
 ### How to get start
-* Make sure got NodeJS and npm installed
-* Clone this repo
-* Create new project directory
-* Copy and paste everything in this repo into new project directory
-* Open package.json and change "name" to your project name and run following commend to install Express server dependencies:
+* Run following commend to install Express server dependencies:
 ```
 npm i
 ```
