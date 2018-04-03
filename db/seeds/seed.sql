@@ -1,25 +1,63 @@
-\c pocketdb;
+\c pocket_db;
 
 INSERT INTO categories(category)
   VALUES
   (
-    'Income'
+    'Rent'
   ),
   (
-    'Rent'
-  );
+    'Mortgage'
+  ),
+  (
+    'Loans'
+  ),
+  (
+    'Utilities'
+  ),
+  (
+    'Restaurants'
+  ),
+  (
+    'Groceries'
+  ),
+  (
+    'Entertainment'
+  ),
+  (
+    'Travel'
+  ),
+  (
+    'Vacation'
+  ),
+  (
+    'Miscellaneous'
+  )
+  ;
 
-INSERT INTO balances(amount, description, asset, category_id)
+INSERT INTO expenses(amount, description, category_id)
   VALUES
   (
-    50000,
-    'Work',
-    TRUE,
-    1
+    500,
+    'GA Loans',
+    3
   ),
   (
     2000,
-    'Rent',
-    FALSE,
-    2
+    'Monthly Rent',
+    1
+  ),
+  (
+    250,
+    'Verizon Cellphone Bill',
+    4
+  ),
+  (
+    100,
+    'Cab Rides',
+    8
+  ),
+  (
+    150,
+    'Groceries',
+    6
   );
