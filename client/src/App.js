@@ -10,7 +10,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      data: null,
+      expenses: null,
       dataLoaded: false
     };
     this.getExpenses = this.getExpenses.bind(this);
@@ -27,7 +27,7 @@ class App extends Component {
       .then(res => res.json())
       .then((res) => {
         this.setState({
-          data: res.data.expenses,
+          expenses: res.data.expenses,
           dataLoaded: true
         });
       })
@@ -62,6 +62,7 @@ class App extends Component {
                 exact
                 path='/'
                 render={props => <Dashboard {...props}
+                  expenses={this.state.expenses}
                 />}
               />
 

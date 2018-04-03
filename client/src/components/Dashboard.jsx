@@ -1,36 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Dashboard.css';
 
-const Dashboard = () => {
-  return (
-    <div className="dashboard">
-      <h1>in Dashboard</h1>
-      <p>Lorem ipsum dolor sit amet, ei eam prompta petentium abhorreant, ei mel atqui populo impedit. Duo imperdiet percipitur definitiones cu, ad duo detracto assentior. Per impedit minimum eu, cu omnis numquam voluptaria his. Sale scribentur per ei, possim partiendo voluptaria pri cu. Mucius electram conceptam sed at, option reprimique cum eu.
+class Dashboard extends Component {
+  constructor(props) {
+    super();
+    this.state = {
 
-      Possit persecuti ea quo, te eos debitis persequeris. Ei nam iudico gubergren disputationi, quem tamquam ea nam. Ut est iusto efficiendi, nihil feugiat disputando usu id. Ridens appellantur eos an. No mei alia decore prodesset, cu usu quando contentiones, cum verear vivendum ad. Facer veniam sea at.
-      </p><br />
-       <p>Lorem ipsum dolor sit amet, ei eam prompta petentium abhorreant, ei mel atqui populo impedit. Duo imperdiet percipitur definitiones cu, ad duo detracto assentior. Per impedit minimum eu, cu omnis numquam voluptaria his. Sale scribentur per ei, possim partiendo voluptaria pri cu. Mucius electram conceptam sed at, option reprimique cum eu.
+    };
+  }
 
-      Possit persecuti ea quo, te eos debitis persequeris. Ei nam iudico gubergren disputationi, quem tamquam ea nam. Ut est iusto efficiendi, nihil feugiat disputando usu id. Ridens appellantur eos an. No mei alia decore prodesset, cu usu quando contentiones, cum verear vivendum ad. Facer veniam sea at.
-      </p><br />
-       <p>Lorem ipsum dolor sit amet, ei eam prompta petentium abhorreant, ei mel atqui populo impedit. Duo imperdiet percipitur definitiones cu, ad duo detracto assentior. Per impedit minimum eu, cu omnis numquam voluptaria his. Sale scribentur per ei, possim partiendo voluptaria pri cu. Mucius electram conceptam sed at, option reprimique cum eu.
-
-      Possit persecuti ea quo, te eos debitis persequeris. Ei nam iudico gubergren disputationi, quem tamquam ea nam. Ut est iusto efficiendi, nihil feugiat disputando usu id. Ridens appellantur eos an. No mei alia decore prodesset, cu usu quando contentiones, cum verear vivendum ad. Facer veniam sea at.
-      </p><br />
-       <p>Lorem ipsum dolor sit amet, ei eam prompta petentium abhorreant, ei mel atqui populo impedit. Duo imperdiet percipitur definitiones cu, ad duo detracto assentior. Per impedit minimum eu, cu omnis numquam voluptaria his. Sale scribentur per ei, possim partiendo voluptaria pri cu. Mucius electram conceptam sed at, option reprimique cum eu.
-
-      Possit persecuti ea quo, te eos debitis persequeris. Ei nam iudico gubergren disputationi, quem tamquam ea nam. Ut est iusto efficiendi, nihil feugiat disputando usu id. Ridens appellantur eos an. No mei alia decore prodesset, cu usu quando contentiones, cum verear vivendum ad. Facer veniam sea at.
-      </p><br />
-       <p>Lorem ipsum dolor sit amet, ei eam prompta petentium abhorreant, ei mel atqui populo impedit. Duo imperdiet percipitur definitiones cu, ad duo detracto assentior. Per impedit minimum eu, cu omnis numquam voluptaria his. Sale scribentur per ei, possim partiendo voluptaria pri cu. Mucius electram conceptam sed at, option reprimique cum eu.
-
-      Possit persecuti ea quo, te eos debitis persequeris. Ei nam iudico gubergren disputationi, quem tamquam ea nam. Ut est iusto efficiendi, nihil feugiat disputando usu id. Ridens appellantur eos an. No mei alia decore prodesset, cu usu quando contentiones, cum verear vivendum ad. Facer veniam sea at.
-      </p><br />
-       <p>Lorem ipsum dolor sit amet, ei eam prompta petentium abhorreant, ei mel atqui populo impedit. Duo imperdiet percipitur definitiones cu, ad duo detracto assentior. Per impedit minimum eu, cu omnis numquam voluptaria his. Sale scribentur per ei, possim partiendo voluptaria pri cu. Mucius electram conceptam sed at, option reprimique cum eu.
-
-      Possit persecuti ea quo, te eos debitis persequeris. Ei nam iudico gubergren disputationi, quem tamquam ea nam. Ut est iusto efficiendi, nihil feugiat disputando usu id. Ridens appellantur eos an. No mei alia decore prodesset, cu usu quando contentiones, cum verear vivendum ad. Facer veniam sea at.
-      </p><br />
-    </div>
-  );
+  render() {
+    return(
+      <div className="dashboard expense-container">
+        <div>
+          <p className="expense-block-title">Expenses</p>
+          <div className="expense-block-subtitle">
+            <p>Description</p>
+            <p>Amount</p>
+            <p>Date</p>
+            <p>Category</p>
+          </div>
+        </div>
+        {this.props.expenses.map((expense, i) => (
+          <div key={expense.id} className="expense-block">
+            <p className="expense-description">{expense.description}</p>
+            <p>${expense.amount}</p>
+            <p>{expense.data_created.slice(0, 10)}</p>
+            <p>Categories</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
 }
 
 export default Dashboard;
