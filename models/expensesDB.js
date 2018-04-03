@@ -10,6 +10,21 @@ module.exports = {
     `);
   },
 
+  findByCategoryId(category_id) {
+    return db.many(`
+      SELECT * FROM expenses e
+      WHERE e.category_id = $1
+    `,id);
+  }
+
+  findById(id) {
+    return db.one(`
+      SELECT * FROM expenses e
+      INNER JOIN categories c on e.category_id = e.id
+      WHERE e.id = $1
+    `, id);
+  },
+
   save(expense) {
   // console.log('this is landmark in model:', landmarks);
   console.log('models')
