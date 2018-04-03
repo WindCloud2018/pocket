@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Dashboard from './components/Dashboard';
 import './App.css';
 
 class App extends Component {
@@ -7,15 +11,10 @@ class App extends Component {
     super();
     this.state = {
       data: null,
-      amount: undefined,
-      description: undefined,
-      asset: undefined,
-      category_id: undefined,
       dataLoaded: false
     };
     this.getBalances = this.getBalances.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.balanceCreate = this.balanceCreate.bind(this);
   }
 
   // Fetch passwords after first mount
@@ -50,35 +49,29 @@ class App extends Component {
       });
   }
 
-  handleChange(e) {
-    const name = e.target.name;
-    const val = e.target.value;
-    this.setState({
-      [name]: val,
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    {this.balanceCreate(e, this.state)}
-  }
-
   render() {
     return (
       <div className="App">
-        {this.state.dataLoaded === true ? (
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              <input type="text" name="amount" value={this.state.amount} placeholder="Amount" onChange={this.handleChange} />
-                <br/>
-              <input type="text" name="description" value={this.state.description} placeholder="Description" onChange={this.handleChange} />
-            </label>
-            <br/>
-            <input className="submitButton" type="submit" value="Submit" />
-          </form>
-        ) : (
-          <p> Loading </p>
-        )}
+        <Header />
+
+        <div className="body-container">
+          {this.state.dataLoaded === true ? (
+            <Switch>
+
+              <Route
+                exact
+                path='/'
+                render={props => <Dashboard {...props}
+                />}
+              />
+
+            </Switch>
+          ) : (
+            <p> Loading </p>
+          )}
+        </div>
+
+        <Footer />
       </div>
     );
   }

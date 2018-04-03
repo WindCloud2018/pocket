@@ -1,0 +1,28 @@
+@import "./components/Header.css";
+@import "./components/Footer.css";
+@import "./components/Dashboard.css";
+
+.header {
+  grid-area: header;
+  text-align: center;
+}
+
+.dashboard {
+  grid-area: dashboard;
+  text-align: center;
+}
+
+.footer {
+  grid-area: footer;
+  text-align: center;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 90px 120px auto 120px 90px;
+  grid-template-rows:  80px 550px auto;
+  grid-template-areas:
+    "header header header header header"
+    "dashboard dashboard dashboard dashboard dashboard"
+    "footer footer footer footer footer"
+}
