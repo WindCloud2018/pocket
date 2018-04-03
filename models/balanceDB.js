@@ -18,4 +18,25 @@ module.exports = {
     `, [balance.amount, balance.description, balance.asset, balance.category_id]);
   },
 
+  update(balance, id) {
+    return db.one(`
+      UPDATE landmarks
+      SET
+        amount = $/amount/,
+        description = $/description/,
+        asset = $/asset/,
+        category_id = $/category_id/
+      WHERE id = $/id/
+      RETURNING *
+    `[balance.amount, balance.description, balance.asset, balance.category_id]);
+  },
+
+  destroy(id) {
+    return db.none(`
+      DELETE
+        FROM balances
+      WHERE id = $1
+    `, id);
+  },
+
 };
