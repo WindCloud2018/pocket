@@ -11,6 +11,7 @@ class App extends Component {
     super();
     this.state = {
       expenses: null,
+      categories: null,
       dataLoaded: false
     };
     this.getExpenses = this.getExpenses.bind(this);
@@ -19,7 +20,19 @@ class App extends Component {
 
   // Fetch passwords after first mount
   componentDidMount() {
+    this.getCategories();
     this.getExpenses();
+  }
+
+  getCategories() {
+    fetch('/api/categories')
+      .then(res => res.json())
+      .then((res) => {
+        this.setState({
+          categories: res.data.categories
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   getExpenses() {
@@ -63,6 +76,7 @@ class App extends Component {
                 path='/'
                 render={props => <Dashboard {...props}
                   expenses={this.state.expenses}
+                  categories={this.state.categories}
                 />}
               />
 

@@ -2,12 +2,17 @@
 @import "./components/Footer.css";
 @import "./components/Dashboard.css";
 
+body {
+  background-color: ivory;
+}
+
 .header {
   grid-area: header;
   text-align: center;
 }
 
 .body-container {
+  min-height: 625px;
   grid-area: body-container;
   text-align: center;
 }

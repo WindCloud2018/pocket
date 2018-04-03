@@ -26,7 +26,11 @@ class Dashboard extends Component {
             <p className="expense-description">{expense.description}</p>
             <p>${expense.amount}</p>
             <p>{expense.data_created.slice(0, 10)}</p>
-            <p>Categories</p>
+            <p>{this.props.categories[9].category}</p>
+            <div className="edit-delete-btn">
+              <button><i className="fas fa-edit"></i></button>
+              <button><i className="fas fa-trash-alt"></i></button>
+            </div>
           </div>
         ))}
       </div>
