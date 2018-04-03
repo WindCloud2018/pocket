@@ -10,12 +10,12 @@ module.exports = {
     `);
   },
 
-  save(test) {
+  save(balance) {
   // console.log('this is landmark in model:', landmarks);
   console.log('models')
   return db.one(`
      INSERT INTO balances (amount, description, asset, category_id) VALUES ($1 ,$2 ,$3, $4) RETURNING *
-    `, [test.amount, test.description, test.asset, test.category_id]);
+    `, [balance.amount, balance.description, balance.asset, balance.category_id]);
   },
 
 };

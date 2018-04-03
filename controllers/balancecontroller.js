@@ -1,28 +1,28 @@
-const testDB = require('../models/testDB');
+const balanceDB = require('../models/balanceDB');
 
 module.exports = {
-  index(req, res, next) {
-    testDB.findAll()
-      .then((test) => {
+  balanceIndex(req, res, next) {
+    balanceDB.findAll()
+      .then((balances) => {
         res.status(200).json({
-          data: { test }
+          data: { balances }
         });
       })
       .catch(err => next(err));
   },
 
-  testCreate(req, res, next) {
+  balanceCreate(req, res, next) {
     console.log(req.body);
-    testDB.save({
+    balanceDB.save({
       amount: req.body.amount,
       description: req.body.description,
       asset: req.body.asset,
       category_id: req.body.category_id,
     })
-      .then((test) => {
+      .then((balance) => {
         res.json({
-          message: 'landmark added successfully!',
-          data: { test },
+          message: 'balance added successfully!',
+          data: { balance },
         });
       })
       .catch(err => next(err));

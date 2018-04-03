@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const port = process.env.PORT || 5000;
 
-const testRoutes = require('./routes/testroutes.js')
+const balanceRoutes = require('./routes/balanceroutes.js')
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //testing routers with local db
-app.use('/api/test', testRoutes);
+app.use('/api/balances', balanceRoutes);
 
 // the "catchall" handeler: for any request that doesn't
 // match one above, send back React's index.html file.

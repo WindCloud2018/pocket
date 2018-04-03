@@ -6,39 +6,39 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      test: null,
-      amount: 12345,
-      description: 'tester',
-      asset: true,
-      category_id: 1,
+      data: null,
+      amount: undefined,
+      description: undefined,
+      asset: undefined,
+      category_id: undefined,
       dataLoaded: false
     };
-    this.getTest = this.getTest.bind(this);
+    this.getBalances = this.getBalances.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   // Fetch passwords after first mount
   componentDidMount() {
-    this.getTest();
+    this.getBalances();
   }
 
-  getTest() {
-    fetch('/api/test')
+  getBalances() {
+    fetch('/api/balances')
       .then(res => res.json())
       .then((res) => {
         this.setState({
-          test: res.data.test,
+          data: res.data.balances,
           dataLoaded: true
         });
       })
       .catch(err => console.log(err));
   }
 
-  testCreate(event, data) {
+  balanceCreate(event, data) {
     console.log(data)
     event.preventDefault();
-    fetch('/api/test', {
+    fetch('/api/balances', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ class App extends Component {
       body: JSON.stringify(data),
     }).then(res => res.json())
       .then(res => {
-        this.getTest();
+        this.getBalances();
       });
   }
 
@@ -60,7 +60,7 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    {this.testCreate(e, this.state)}
+    {this.balanceCreate(e, this.state)}
   }
 
   render() {
@@ -69,9 +69,9 @@ class App extends Component {
         {this.state.dataLoaded === true ? (
           <form onSubmit={this.handleSubmit}>
             <label>
-              <input className="submitTitle" type="text" name="amount" value={this.state.amount} placeholder="Amount" onChange={this.handleChange} />
+              <input type="text" name="amount" value={this.state.amount} placeholder="Amount" onChange={this.handleChange} />
                 <br/>
-              <input className="submitPost" type="text" name="description" value={this.state.description} placeholder="Description" onChange={this.handleChange} />
+              <input type="text" name="description" value={this.state.description} placeholder="Description" onChange={this.handleChange} />
             </label>
             <br/>
             <input className="submitButton" type="submit" value="Submit" />
