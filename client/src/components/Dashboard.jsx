@@ -22,7 +22,7 @@ class Dashboard extends Component {
           </div>
         </div>
         {this.props.expenses.map((expense, i) => (
-          <div key={expense.id} className="expense-block">
+          <div key={i} className="expense-block">
             <p className="expense-description">{expense.description}</p>
             <p>${expense.amount}</p>
             <p>{expense.data_created.slice(0, 10)}</p>
