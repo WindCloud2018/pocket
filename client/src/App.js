@@ -13,31 +13,31 @@ class App extends Component {
       data: null,
       dataLoaded: false
     };
-    this.getBalances = this.getBalances.bind(this);
-    this.balanceCreate = this.balanceCreate.bind(this);
+    this.getExpenses = this.getExpenses.bind(this);
+    this.expenseCreate = this.expenseCreate.bind(this);
   }
 
   // Fetch passwords after first mount
   componentDidMount() {
-    this.getBalances();
+    this.getExpenses();
   }
 
-  getBalances() {
-    fetch('/api/balances')
+  getExpenses() {
+    fetch('/api/expenses')
       .then(res => res.json())
       .then((res) => {
         this.setState({
-          data: res.data.balances,
+          data: res.data.expenses,
           dataLoaded: true
         });
       })
       .catch(err => console.log(err));
   }
 
-  balanceCreate(event, data) {
+  expenseCreate(event, data) {
     console.log(data)
     event.preventDefault();
-    fetch('/api/balances', {
+    fetch('/api/expenses', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ class App extends Component {
       body: JSON.stringify(data),
     }).then(res => res.json())
       .then(res => {
-        this.getBalances();
+        this.getExpenses();
       });
   }
 
