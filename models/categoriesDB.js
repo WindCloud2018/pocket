@@ -6,7 +6,7 @@ module.exports = {
     return db.many(`
       SELECT *
       FROM categories
-      ORDER BY id ASC
+      ORDER BY category_id ASC
     `);
   },
 

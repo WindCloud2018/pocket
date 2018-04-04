@@ -4,14 +4,14 @@ DROP TABLE IF EXISTS expenses;
 DROP TABLE IF EXISTS categories;
 
 CREATE TABLE categories (
-  id SERIAL PRIMARY KEY,
+  category_id SERIAL PRIMARY KEY,
   category VARCHAR(64)
 );
 
 CREATE TABLE expenses (
-  id SERIAL PRIMARY KEY,
+  expense_id SERIAL PRIMARY KEY,
   amount INT NOT NULL,
-  description VARCHAR(128),
-  category_id INT REFERENCES categories(id),
-  data_created TIMESTAMP NOT NULL DEFAULT NOW()
+  description VARCHAR(128) NOT NULL,
+  category_id INT NOT NULL REFERENCES categories(category_id),
+  expense_date TIMESTAMP NOT NULL DEFAULT NOW()
 );

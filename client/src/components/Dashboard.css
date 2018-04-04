@@ -2,23 +2,26 @@
   border: 5px solid black;
 }
 
+.expense-block-title {
+
+}
+
 .expense-block-subtitle {
+  border-top: 3px solid gray;
   border-bottom: 3px solid gray;
   display: grid;
-  grid-template-columns: auto 80px 100px 120px 60px;
+  grid-template-columns: auto 80px 100px 120px 45px;
 }
 
 .expense-block {
   border-bottom: 1px solid gray;
   display: grid;
-  grid-template-columns: auto 80px 100px 120px 60px;
-}
-
-button {
-  margin: 5px 10px 0 10px;
+  grid-template-columns: auto 80px 100px 120px 45px;
+  margin-top: 16px;
 }
 
 .expense-description {
   text-align: left;
-  padding-left: 10px;
+  padding-left: 16px;
 }
+
