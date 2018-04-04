@@ -4,10 +4,19 @@ import './Dashboard.css';
 
 class Dashboard extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-
+      id: null
     };
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleDelete(id) {
+    // {this.props.deleteExpense()}
+    this.setState({
+      id: id
+    })
+
   }
 
   render() {
@@ -27,14 +36,20 @@ class Dashboard extends Component {
             </div>
           </div>
           {this.props.expenses.map((expense, i) => (
-            <div key={i} className="expense-block">
+            <div key={expense.expense_id} className="expense-block">
               <p className="expense-description">{expense.description}</p>
               <p>${expense.amount}</p>
-              <p>{expense.data_created.slice(0, 10)}</p>
+              <p>{expense.expense_date.slice(0, 10)}</p>
               <p>{expense.category}</p>
               <div>
-                <i className="fas fa-edit"></i>
-                <i className="fas fa-trash-alt"></i>
+                <button
+                  className="edit-btn"
+                  value={expense.expense_id}
+                  onClick={() => {
+                    this.handleDelete(expense.expense_id)
+                  }}
+                ><i className="fas fa-edit"></i></button>
+                <button className="delete-btn"><i className="fas fa-trash-alt"></i></button>
               </div>
             </div>
           ))}

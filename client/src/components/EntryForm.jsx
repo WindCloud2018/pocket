@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, ModalFooter } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import './EntryForm.css';
 
 class EntryForm extends Component {
@@ -9,9 +9,18 @@ class EntryForm extends Component {
       description: '',
       amount: '',
       category_id: 1,
+      expense_date: '',
+      missing_info: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      missing_info: !this.state.missing_info
+    });
   }
 
   handleChange(e) {
@@ -24,8 +33,18 @@ class EntryForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.toggle()
-    this.props.expenseCreate(e, this.state)
+    if (
+      this.state.description !== '' &&
+      this.state.amount !== '' &&
+      this.state.expense_date !== ''
+      ) {
+      this.props.toggle()
+      this.props.expenseCreate(e, this.state)
+    } else {
+      this.setState({
+        missing_info: true
+      })
+    }
   }
 
   render() {
@@ -67,17 +86,37 @@ class EntryForm extends Component {
           >
             {this.props.categories.map((category, i) => (
               <option
-                key={category.id}
-                value={category.id}
+                key={category.category_id}
+                value={category.category_id}
               >{category.category}</option>
             ))}
           </Input>
         </FormGroup>
 
+        <FormGroup>
+          <Label for="expense_date">Expense Date</Label>
+          <Input
+            type="date"
+            name="expense_date"
+            id="expense_date"
+            placeholder="Date"
+            onChange={this.handleChange}
+          />
+        </FormGroup>
+
         <ModalFooter>
-          <Button color="secondary" onClick={this.handleSubmit}>Submit</Button>{' '}
-          <Button color="link" onClick={this.toggle}>Cancel</Button>
+          <Button color="secondary" onClick={this.handleSubmit}>Submit</Button>
+          <Button color="link" onClick={this.props.toggle}>Cancel</Button>
+        </ModalFooter>
+
+        <Modal isOpen={this.state.missing_info} toggle={this.toggle} className={this.props.className}>
+          <ModalBody>
+            Please Fill Out Every Section.
+          </ModalBody>
+          <ModalFooter>
+            <Button color="danger" onClick={this.toggle}>Ok</Button>
           </ModalFooter>
+        </Modal>
       </Form>
     )
   }
