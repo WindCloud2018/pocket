@@ -29,8 +29,9 @@ module.exports = {
       amount: req.body.amount,
       description: req.body.description,
       category_id: req.body.category_id,
+      expense_date: req.body.expense_date
     })
-      .then((expenses) => {
+      .then((expense) => {
         res.json({
           message: 'expense added successfully!',
           data: { expense },

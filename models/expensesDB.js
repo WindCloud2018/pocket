@@ -6,23 +6,23 @@ module.exports = {
     return db.many(`
       SELECT *
       FROM expenses e
-      INNER JOIN categories c on
-        e.category_id = c.id
-      ORDER BY data_created ASC
+      INNER JOIN categories c
+      ON e.category_id = c.category_id
+      ORDER BY expense_date ASC
     `);
   },
 
-  findByCategoryId(category_id) {
+  findByCategoryId(id) {
     return db.many(`
       SELECT * FROM expenses e
       WHERE e.category_id = $1
-    `,id);
+    `, id);
   },
 
   findById(id) {
     return db.one(`
       SELECT * FROM expenses e
-      INNER JOIN categories c on e.category_id = c.id
+      INNER JOIN categories c ON e.category_id = c.id
       WHERE e.id = $1
     `, id);
   },
@@ -31,8 +31,8 @@ module.exports = {
   // console.log('this is landmark in model:', landmarks);
   console.log('models')
   return db.one(`
-     INSERT INTO expenses (amount, description,  category_id) VALUES ($1 ,$2 ,$3, $4) RETURNING *
-    `, [expense.amount, expense.description, expense.category_id]);
+     INSERT INTO expenses (amount, description, category_id, expense_date) VALUES ($1, $2, $3, $4) RETURNING *
+    `, [expense.amount, expense.description, expense.category_id, expense.expense_date]);
   },
 
   update(expense, id) {
@@ -41,10 +41,11 @@ module.exports = {
       SET
         amount = $/amount/,
         description = $/description/,
-        category_id = $/category_id/
+        category_id = $/category_id/,
+        expense_date = $/expense_date/
       WHERE id = $/id/
       RETURNING *
-    `[expense.amount, expense.description, expense.category_id]);
+    `[expense.amount, expense.description, expense.category_id, expense.expense_date]);
   },
 
   destroy(id) {

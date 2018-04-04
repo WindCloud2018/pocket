@@ -3,6 +3,7 @@
 @import "./components/Dashboard.css";
 
 body {
+  font-family: 'Roboto', sans-serif;
   background-color: ivory;
 }
 
