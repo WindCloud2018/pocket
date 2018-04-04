@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import EntryForm from './EntryForm';
 import './CreateNewExpense.css';
 
@@ -22,16 +22,15 @@ class CreateNewExpense extends Component {
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>Launch Modal</Button>
+        <Button color="secondary" onClick={this.toggle}>Launch Modal</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Add Expense</ModalHeader>
           <ModalBody>
-            <EntryForm {...this.props}/>
+            <EntryForm
+              {...this.props}
+              toggle={this.toggle}
+            />
           </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
         </Modal>
       </div>
     )

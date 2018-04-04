@@ -30,7 +30,7 @@ module.exports = {
       description: req.body.description,
       category_id: req.body.category_id,
     })
-      .then((expenses) => {
+      .then((expense) => {
         res.json({
           message: 'expense added successfully!',
           data: { expense },

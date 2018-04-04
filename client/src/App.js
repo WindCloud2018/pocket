@@ -77,6 +77,7 @@ class App extends Component {
                 render={props => <Dashboard {...props}
                   expenses={this.state.expenses}
                   categories={this.state.categories}
+                  expenseCreate={this.expenseCreate}
                 />}
               />
 
