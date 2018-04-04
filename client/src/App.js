@@ -4,6 +4,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import './App.css';
+import Reports from './components/Reports';
+
 
 class App extends Component {
   // Initialize state
@@ -12,8 +14,10 @@ class App extends Component {
     this.state = {
       expenses: null,
       categories: null,
-      dataLoaded: false
-    };
+      dataLoaded: false,
+      pieChartData: {},
+      barChartData: {}
+    }
     this.getExpenses = this.getExpenses.bind(this);
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseDelete = this.expenseDelete.bind(this);
@@ -23,7 +27,10 @@ class App extends Component {
   componentDidMount() {
     this.getCategories();
     this.getExpenses();
+    this.getPChartData();
+    this.getBarChartData();
   }
+
 
   getCategories() {
     fetch('/api/categories')
@@ -63,6 +70,74 @@ class App extends Component {
       });
   }
 
+
+  getPChartData(){
+    //make ajax call here if calling axios or fetch
+    this.setState({
+      pieChartData:{
+        labels: ['Rent', 'Mortgage', 'Loans', 'Utilities', 'Restaurants', 'Groceries', 'Entertainment', 'Travel', 'Vacation', 'Miscellaneous'],
+        datasets:[
+          {
+            label:'Category',
+            data:[
+              2000,
+              0,
+              500,
+              250,
+              0,
+              150,
+              0,
+              100,
+              0,
+              0
+            ],
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'green',
+              'blue',
+              'orange',
+              'grey',
+            ]
+          }
+        ]
+      }
+    });
+  };
+
+  getBarChartData(){
+    //make ajax call axios or fetch here to get data from db
+    this.setState({
+      barChartData: {
+        labels: ['April'],
+        datasets: [
+          {
+            label: 'Expenses',
+            data:[
+              3000
+            ],
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'green',
+              'blue',
+              'orange',
+              'grey',
+            ]
+          }
+        ]
+      }
+    });
+  };
+
   expenseDelete(id) {
     const rootUrl = window.location.origin;
     const pathUrl = `/api/expenses/${id}`;
@@ -81,7 +156,6 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-
         <div className="body-container">
           {this.state.dataLoaded === true ? (
             <Switch>
@@ -97,6 +171,15 @@ class App extends Component {
                 />}
               />
 
+              <Route
+                path='/reports'
+                render={props => <Reports {...props}
+                  pieChartData={this.state.pieChartData}
+                  barChartData={this.state.barChartData}
+                  expenses={this.state.expenses}
+                  categories={this.state.categories}
+                />}
+              />
             </Switch>
           ) : (
             <p> Loading </p>
