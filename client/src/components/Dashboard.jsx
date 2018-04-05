@@ -9,14 +9,17 @@ class Dashboard extends Component {
       id: null
     };
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleDelete(id) {
-    // {this.props.deleteExpense()}
+    this.props.expenseDelete(id)
+  }
+
+  handleEdit(id) {
     this.setState({
       id: id
     })
-
   }
 
   render() {
@@ -46,10 +49,15 @@ class Dashboard extends Component {
                   className="edit-btn"
                   value={expense.expense_id}
                   onClick={() => {
-                    this.handleDelete(expense.expense_id)
+                    this.handleEdit(expense.expense_id)
                   }}
                 ><i className="fas fa-edit"></i></button>
-                <button className="delete-btn"><i className="fas fa-trash-alt"></i></button>
+                <button
+                  className="delete-btn"
+                  onClick={() => {
+                    this.handleDelete(expense.expense_id)
+                  }}
+                ><i className="fas fa-trash-alt"></i></button>
               </div>
             </div>
           ))}

@@ -8,7 +8,7 @@ module.exports = {
       FROM expenses e
       INNER JOIN categories c
       ON e.category_id = c.category_id
-      ORDER BY expense_date ASC
+      ORDER BY expense_date, expense_id ASC
     `);
   },
 
@@ -52,7 +52,7 @@ module.exports = {
     return db.none(`
       DELETE
         FROM expenses
-      WHERE id = $1
+      WHERE expense_id = $1
     `, id);
   },
 

@@ -56,7 +56,6 @@ class App extends Component {
   }
 
   expenseCreate(event, data) {
-    console.log(data)
     event.preventDefault();
     fetch('/api/expenses', {
       method: 'POST',
@@ -68,6 +67,19 @@ class App extends Component {
       .then(res => {
         this.getExpenses();
       });
+  }
+
+  expenseDelete(id) {
+    const rootUrl = window.location.origin;
+    const pathUrl = `/api/expenses/${id}`;
+    const newUrl = rootUrl.concat(pathUrl);
+    fetch(newUrl, {
+      method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(res => {
+      this.getExpenses();
+    });
   }
 
 
@@ -137,20 +149,6 @@ class App extends Component {
       }
     });
   };
-
-  expenseDelete(id) {
-    const rootUrl = window.location.origin;
-    const pathUrl = `/api/expenses/${id}`;
-    const newUrl = rootUrl.concat(pathUrl);
-
-    fetch(newUrl, {
-      method: 'DELETE',
-    })
-    .then(res => res.json())
-    .then(res => {
-      this.getExpenses();
-    });
-  }
 
   render() {
     return (

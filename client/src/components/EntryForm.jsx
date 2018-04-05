@@ -51,6 +51,7 @@ class EntryForm extends Component {
     return (
       <Form>
 
+{/* Fields for data entry */}
         <FormGroup>
           <Label for="description">Description</Label>
           <Input
@@ -81,7 +82,7 @@ class EntryForm extends Component {
             type="select"
             name="category_id"
             id="category_id"
-            value={this.state.category}
+            value={this.state.category_id}
             onChange={this.handleChange}
           >
             {this.props.categories.map((category, i) => (
@@ -99,16 +100,18 @@ class EntryForm extends Component {
             type="date"
             name="expense_date"
             id="expense_date"
-            placeholder="Date"
+            value={this.state.expense_date}
             onChange={this.handleChange}
           />
         </FormGroup>
 
+{/* Display Submit and cancel button for form */}
         <ModalFooter>
           <Button color="secondary" onClick={this.handleSubmit}>Submit</Button>
           <Button color="link" onClick={this.props.toggle}>Cancel</Button>
         </ModalFooter>
 
+{/* Show modal style warning if all fields not filled */}
         <Modal isOpen={this.state.missing_info} toggle={this.toggle} className={this.props.className}>
           <ModalBody>
             Please Fill Out Every Section.
