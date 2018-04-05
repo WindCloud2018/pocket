@@ -30,11 +30,11 @@ DB_NAME=name of your database
 ### How to start local environment
 * Start local server
 ```
-npm run dev
+npm run start
 ```
 * Start local front-end
 ```
-npm run start
+npm run dev
 ```
 
 ### How to deploy to Heroku with Git
