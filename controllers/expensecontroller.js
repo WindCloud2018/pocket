@@ -41,18 +41,31 @@ module.exports = {
   },
 
   expenseUpdate(req, res, next) {
-    expensesDB.update({
-      amount: req.body.amount,
-      description: req.body.description,
-      category_id: req.body.category_id,
-    })
-    .then((expense) => {
-      res.json({
-        message: 'expense update success',
-        data: { expense },
-      });
-    })
-    .catch(err => next(err));
+
+    console.log(req.body, 'update controller');
+    expensesDB.update(req.body)
+      .then((expense) => {
+        res.locals.expense = expense;
+        next()
+      })
+      .catch(err => next(err));
+
+    // expensesDB.findById(req.body.expense_id)
+    //   .then((expense) => {
+    //     expensesDB.update({
+    //       amount: req.body.amount,
+    //       description: req.body.description,
+    //       category_id: req.body.category_id,
+    //       expense_date: req.body.expense_date
+    //     });
+    //   })
+    //   .then((expense) => {
+    //     res.json({
+    //       message: 'expense update success',
+    //       data: { expense },
+    //     });
+    //   })
+    //   .catch(err => next(err));
   },
 
   expenseDestroy(req, res, next) {

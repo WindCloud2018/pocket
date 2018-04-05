@@ -21,6 +21,7 @@ class App extends Component {
     this.getExpenses = this.getExpenses.bind(this);
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseDelete = this.expenseDelete.bind(this);
+    this.expenseEdit = this.expenseEdit.bind(this);
     this.getPChartData = this.getPChartData.bind(this);
     this.getBChartData = this.getBChartData.bind(this);
   }
@@ -56,7 +57,6 @@ class App extends Component {
   }
 
   expenseCreate(event, data) {
-    console.log(data)
     event.preventDefault();
     fetch('/api/expenses', {
       method: 'POST',
@@ -70,6 +70,35 @@ class App extends Component {
       });
   }
 
+  expenseEdit(event, data, id) {
+    event.preventDefault();
+    const rootUrl = window.location.origin;
+    const pathUrl = `/api/expenses/${id}`;
+    const newUrl = rootUrl.concat(pathUrl);
+    fetch(newUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(res => res.json())
+      .then(res => {
+        this.getExpenses();
+      });
+  }
+
+  expenseDelete(id) {
+    const rootUrl = window.location.origin;
+    const pathUrl = `/api/expenses/${id}`;
+    const newUrl = rootUrl.concat(pathUrl);
+    fetch(newUrl, {
+      method: 'DELETE',
+    })
+    .then(res => res.json())
+    .then(res => {
+      this.getExpenses();
+    });
+  }
 
 
   getPChartData(){
@@ -178,20 +207,6 @@ class App extends Component {
     });
   };
 
-  expenseDelete(id) {
-    const rootUrl = window.location.origin;
-    const pathUrl = `/api/expenses/${id}`;
-    const newUrl = rootUrl.concat(pathUrl);
-
-    fetch(newUrl, {
-      method: 'DELETE',
-    })
-    .then(res => res.json())
-    .then(res => {
-      this.getExpenses();
-    });
-  }
-
   render() {
     return (
       <div className="App">
@@ -208,6 +223,7 @@ class App extends Component {
                   categories={this.state.categories}
                   expenseCreate={this.expenseCreate}
                   expenseDelete={this.expenseDelete}
+                  expenseEdit={this.expenseEdit}
                 />}
               />
 
