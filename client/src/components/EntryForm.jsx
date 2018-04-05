@@ -6,6 +6,7 @@ class EntryForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      expense_id: '',
       description: '',
       amount: '',
       category_id: 1,
@@ -15,6 +16,19 @@ class EntryForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.checkFills = this.checkFills.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.editing) {
+      this.setState({
+        expense_id: this.props.cur_expense_id,
+        description: this.props.cur_description,
+        amount: this.props.cur_amount,
+        category_id: this.props.cur_category_id,
+        expense_date: this.props.cur_expense_date.slice(0, 10)
+      })
+    }
   }
 
   toggle() {
@@ -31,15 +45,27 @@ class EntryForm extends Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  checkFills() {
     if (
       this.state.description !== '' &&
       this.state.amount !== '' &&
       this.state.expense_date !== ''
       ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.checkFills()) {
       this.props.toggle()
-      this.props.expenseCreate(e, this.state)
+      if (this.props.editing) {
+        this.props.expenseEdit(e, this.state, this.state.expense_id)
+      } else {
+        this.props.expenseCreate(e, this.state)
+      }
     } else {
       this.setState({
         missing_info: true
@@ -105,9 +131,15 @@ class EntryForm extends Component {
           />
         </FormGroup>
 
-{/* Display Submit and cancel button for form */}
+{/* Display Submit/Edit and cancel button for form */}
         <ModalFooter>
-          <Button color="secondary" onClick={this.handleSubmit}>Submit</Button>
+
+          <Button color="secondary" onClick={this.handleSubmit}>
+
+            {this.props.editing ? "Edit" : "Submit"}
+
+          </Button>
+
           <Button color="link" onClick={this.props.toggle}>Cancel</Button>
         </ModalFooter>
 

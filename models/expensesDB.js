@@ -22,7 +22,6 @@ module.exports = {
   findById(id) {
     return db.one(`
       SELECT * FROM expenses e
-      INNER JOIN categories c ON e.category_id = c.id
       WHERE e.id = $1
     `, id);
   },
@@ -35,7 +34,7 @@ module.exports = {
     `, [expense.amount, expense.description, expense.category_id, expense.expense_date]);
   },
 
-  update(expense, id) {
+  update(expense) {
     return db.one(`
       UPDATE expenses
       SET
@@ -43,9 +42,9 @@ module.exports = {
         description = $/description/,
         category_id = $/category_id/,
         expense_date = $/expense_date/
-      WHERE id = $/id/
+      WHERE expense_id = $/expense_id/
       RETURNING *
-    `[expense.amount, expense.description, expense.category_id, expense.expense_date]);
+    `, expense);
   },
 
   destroy(id) {

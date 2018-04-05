@@ -21,6 +21,7 @@ class App extends Component {
     this.getExpenses = this.getExpenses.bind(this);
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseDelete = this.expenseDelete.bind(this);
+    this.expenseEdit = this.expenseEdit.bind(this);
   }
 
   // Fetch passwords after first mount
@@ -69,6 +70,23 @@ class App extends Component {
       });
   }
 
+  expenseEdit(event, data, id) {
+    event.preventDefault();
+    const rootUrl = window.location.origin;
+    const pathUrl = `/api/expenses/${id}`;
+    const newUrl = rootUrl.concat(pathUrl);
+    fetch(newUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(res => res.json())
+      .then(res => {
+        this.getExpenses();
+      });
+  }
+
   expenseDelete(id) {
     const rootUrl = window.location.origin;
     const pathUrl = `/api/expenses/${id}`;
@@ -81,7 +99,6 @@ class App extends Component {
       this.getExpenses();
     });
   }
-
 
   getPChartData(){
     //make ajax call here if calling axios or fetch
@@ -166,6 +183,7 @@ class App extends Component {
                   categories={this.state.categories}
                   expenseCreate={this.expenseCreate}
                   expenseDelete={this.expenseDelete}
+                  expenseEdit={this.expenseEdit}
                 />}
               />
 
