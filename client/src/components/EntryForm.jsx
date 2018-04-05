@@ -139,7 +139,6 @@ class EntryForm extends Component {
             {this.props.editing ? "Edit" : "Submit"}
 
           </Button>
-
           <Button color="link" onClick={this.props.toggle}>Cancel</Button>
         </ModalFooter>
 
