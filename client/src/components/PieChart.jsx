@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
 
 
-const PieChart = (props) => {
-    return (
+class PieChart extends Component {
+
+componentDidMount(){
+  this.props.getPChartData();
+}
+
+render(){
+  return (
       <div className="chart">
         <Pie
-          data={props.pieChartData}
+          data={this.props.pieChartData}
           options={{
             // maintainAspectRatio: false
             title:{
@@ -22,6 +28,8 @@ const PieChart = (props) => {
           />
       </div>
     );
+}
+
 }
 
 
