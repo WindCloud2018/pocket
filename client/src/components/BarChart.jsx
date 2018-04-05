@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const BarChart = (props) => {
+class BarChart extends Component {
+
+  componentDidMount(){
+    this.props.getBChartData();
+  }
+
+  render() {
     return (
       <div className="chart">
         <Bar
-          data={props.barChartData}
+          data={this.props.barChartData}
           options={{
             // maintainAspectRatio: false
             title:{
@@ -21,6 +27,8 @@ const BarChart = (props) => {
           />
       </div>
     );
+  }
+
 }
 
 

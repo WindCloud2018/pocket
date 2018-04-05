@@ -21,14 +21,14 @@ class App extends Component {
     this.getExpenses = this.getExpenses.bind(this);
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseDelete = this.expenseDelete.bind(this);
+    this.getPChartData = this.getPChartData.bind(this);
+    this.getBChartData = this.getBChartData.bind(this);
   }
 
   // Fetch passwords after first mount
   componentDidMount() {
     this.getCategories();
     this.getExpenses();
-    this.getPChartData();
-    this.getBarChartData();
   }
 
 
@@ -71,26 +71,67 @@ class App extends Component {
   }
 
 
+
   getPChartData(){
-    //make ajax call here if calling axios or fetch
+  // const categoryData = ['','','','']
+  const categoryData = [];
+  this.state.categories.forEach((category) => {
+    categoryData.push(category.category);
+    console.log(categoryData);
+  })
+
+  const expenseData = {
+      'Rent': 0,
+      'Mortgage': 0,
+      'Loans': 0,
+      'Utilities': 0,
+      'Restaurants': 0,
+      'Groceries': 0,
+      'Entertainment': 0,
+      'Travel': 0,
+      'Vacation': 0,
+      'Miscellaneous': 0
+    };
+  this.state.expenses.map((expense) => {
+    if (expense.category_id === 1) {
+      expense = (expenseData.Rent + expense.amount);
+    }
+    if (expense.category_id === 2) {
+      expense = (expenseData.Mortgage += expense.amount);
+    }
+    if (expense.category_id === 3) {
+      expense = (expenseData.Loans += expense.amount);
+    }
+    if (expense.category_id === 4) {
+      expense = (expenseData.Utilities += expense.amount);
+    }
+    if (expense.category_id === 5) {
+      expense = (expenseData.Restaurants += expense.amount);
+    }
+    if (expense.category_id === 6) {
+      expense = (expenseData.Groceries += expense.amount);
+    }
+    if (expense.category_id === 7) {
+      expense = (expenseData.Entertainment += expense.amount);
+    }
+    if (expense.category_id === 8) {
+      expense = (expenseData.Travel += expense.amount);
+    }
+    if (expense.category_id === 9) {
+      expense = (expenseData.Vacation += expense.amount);
+    }
+    if (expense.category_id === 10) {
+      expense = (expenseData.Miscellaneous += expense.amount);
+    }
+  })
     this.setState({
       pieChartData:{
-        labels: ['Rent', 'Mortgage', 'Loans', 'Utilities', 'Restaurants', 'Groceries', 'Entertainment', 'Travel', 'Vacation', 'Miscellaneous'],
+        // labels: ['a','b','c','d','e','f','g','h'],
+        labels: categoryData,
         datasets:[
           {
             label:'Category',
-            data:[
-              2000,
-              0,
-              500,
-              250,
-              0,
-              150,
-              0,
-              100,
-              0,
-              0
-            ],
+            data: expenseData[0],
             backgroundColor:[
               'rgba(255, 99, 132, 0.6)',
               'rgba(54, 162, 235, 0.6)',
@@ -109,8 +150,7 @@ class App extends Component {
     });
   };
 
-  getBarChartData(){
-    //make ajax call axios or fetch here to get data from db
+  getBChartData(){
     this.setState({
       barChartData: {
         labels: ['April'],
@@ -175,6 +215,8 @@ class App extends Component {
                 path='/reports'
                 render={props => <Reports {...props}
                   pieChartData={this.state.pieChartData}
+                  getPChartData={this.getPChartData}
+                  getBChartData={this.getBChartData}
                   barChartData={this.state.barChartData}
                   expenses={this.state.expenses}
                   categories={this.state.categories}
