@@ -194,13 +194,28 @@ class App extends Component {
     });
   };
 
-  getBChartData(){
+    //tried to dynamically render dates from data base but realized if user doesnt track expenses that month then app will just leave it blank no need to do it dynamically. whats important is to be able to group all the expenses to their related months and years.
+
+    // this.state.expenses.map((expense, i) => {
+    //   const extract = expense.expense_date.slice(0,7).split('-');
+    //   if (extract[1] !== -1) {
+    //     dates.push(extract[1])
+    //   }
+    // })
+    getBChartData(){
+    const dates = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+//continue tomorrow...
+    // const totalExpense = 0;
+    // this.state.expenses.map((expense) => {
+    //   if (expense.expense_date.slice(0,8).split === 01)
+    // })
     this.setState({
       barChartData: {
-        labels: ['April'],
+        labels: dates,
         datasets: [
           {
-            label: 'Expenses',
+            label: 'Total Monthly Expenses',
             data:[
               3000
             ],
