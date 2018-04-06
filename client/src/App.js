@@ -205,19 +205,83 @@ class App extends Component {
     getBChartData(){
     const dates = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-//continue tomorrow...
-    // const totalExpense = 0;
-    // this.state.expenses.map((expense) => {
-    //   if (expense.expense_date.slice(0,8).split === 01)
-    // })
+    const monthlyExpense = [{
+      'Jan': 0,
+      'Feb': 0,
+      'Mar': 0,
+      'Apr': 0,
+      'May': 0,
+      'Jun': 0,
+      'Jul': 0,
+      'Aug': 0,
+      'Sep': 0,
+      'Oct': 0,
+      'Nov': 0,
+      'Dec': 0
+    }]
+
+    this.state.expenses.map((expense) => {
+      const dbMonth = expense.expense_date.slice(6,7); console.log(dbMonth)
+        // console.log(months[0].Apr += expense.amount)
+      if (dbMonth === '1') {
+        monthlyExpense[0].Jan += expense.amount
+      }
+       if (dbMonth === '2') {
+        monthlyExpense[0].Feb += expense.amount
+      }
+       if (dbMonth === '3') {
+        monthlyExpense[0].Mar += expense.amount
+      }
+       if (dbMonth === '4') {
+        monthlyExpense[0].Apr += expense.amount
+      }
+       if (dbMonth === '5') {
+        monthlyExpense[0].May += expense.amount
+      }
+       if (dbMonth === '6') {
+        monthlyExpense[0].Jun += expense.amount
+      }
+       if (dbMonth === '7') {
+        monthlyExpense[0].Jul+= expense.amount
+      }
+       if (dbMonth === '8') {
+        monthlyExpense[0].Aug += expense.amount
+      }
+       if (dbMonth === '9') {
+        monthlyExpense[0].Sep += expense.amount
+      }
+       if (dbMonth === '10') {
+        monthlyExpense[0].Oct += expense.amount
+      }
+       if (dbMonth === '11') {
+        monthlyExpense[0].Nov += expense.amount
+      }
+       if (dbMonth === '12') {
+        monthlyExpense[0].Dec += expense.amount
+      }
+      return monthlyExpense[0];
+    });
+    console.log(monthlyExpense[0]);
+
     this.setState({
       barChartData: {
         labels: dates,
         datasets: [
           {
             label: 'Total Monthly Expenses',
-            data:[
-              3000
+            data: [
+              monthlyExpense[0].Jan,
+              monthlyExpense[0].Feb,
+              monthlyExpense[0].Mar,
+              monthlyExpense[0].Apr,
+              monthlyExpense[0].May,
+              monthlyExpense[0].Jun,
+              monthlyExpense[0].Jul,
+              monthlyExpense[0].Aug,
+              monthlyExpense[0].Sep,
+              monthlyExpense[0].Oct,
+              monthlyExpense[0].Nov,
+              monthlyExpense[0].Dec
             ],
             backgroundColor:[
               'rgba(255, 99, 132, 0.6)',
@@ -282,37 +346,3 @@ class App extends Component {
 
 export default App;
 
-
-  // this.state.expenses.forEach((expense) => {
-  //   if (expense.category_id === 1) {
-  //     expenseData.Rent = expenseData.Rent += expense.amount
-  //   }
-  //   if (expense.category_id === 2) {
-  //     expenseData.Mortgage = expenseData.Mortgage +=expense.amount
-  //   }
-  //   if (expense.category_id === 3) {
-  //     expenseData.Loans = expenseData.Loans += expense.amount
-  //   }
-  //   if (expense.category_id === 4) {
-  //     expenseData.Utilities = expenseData.Utilities +=expense.amount
-  //   }
-  //   if (expense.category_id === 5) {
-  //     expenseData.Restaurants = expenseData.Restaurants += expense.amount
-  //   }
-  //   if (expense.category_id === 6) {
-  //     expenseData.Groceries = expenseData.Groceries += expense.amount
-  //   }
-  //   if (expense.category_id === 7) {
-  //     expenseData.Entertainment = expenseData.Entertainment += expense.amount
-  //   }
-  //   if (expense.category_id === 8) {
-  //     expenseData.Travel += expenseData.Travel += expense.amount
-  //   }
-  //   if (expense.category_id === 9) {
-  //     expenseData.Vacation = expenseData.Vacation += expense.amount
-  //   }
-  //   if (expense.category_id === 10) {
-  //     expenseData.Miscellaneous = expenseData.Miscellaneous += expense.amount
-  //   }
-
-  // })
