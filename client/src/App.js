@@ -101,15 +101,16 @@ class App extends Component {
   }
 
 
-  getPChartData(){
+    getPChartData(){
   // const categoryData = ['','','','']
   const categoryData = [];
-  this.state.categories.forEach((category) => {
+  this.state.categories.map((category) => {
     categoryData.push(category.category);
-    console.log(categoryData);
+    return categoryData;
   })
+  console.log(categoryData);
 
-  const expenseData = {
+  const expenseData = [{
       'Rent': 0,
       'Mortgage': 0,
       'Loans': 0,
@@ -120,47 +121,61 @@ class App extends Component {
       'Travel': 0,
       'Vacation': 0,
       'Miscellaneous': 0
-    };
-  this.state.expenses.map((expense) => {
-    if (expense.category_id === 1) {
-      expense = (expenseData.Rent + expense.amount);
-    }
-    if (expense.category_id === 2) {
-      expense = (expenseData.Mortgage += expense.amount);
-    }
-    if (expense.category_id === 3) {
-      expense = (expenseData.Loans += expense.amount);
-    }
-    if (expense.category_id === 4) {
-      expense = (expenseData.Utilities += expense.amount);
-    }
-    if (expense.category_id === 5) {
-      expense = (expenseData.Restaurants += expense.amount);
-    }
-    if (expense.category_id === 6) {
-      expense = (expenseData.Groceries += expense.amount);
-    }
-    if (expense.category_id === 7) {
-      expense = (expenseData.Entertainment += expense.amount);
-    }
-    if (expense.category_id === 8) {
-      expense = (expenseData.Travel += expense.amount);
-    }
-    if (expense.category_id === 9) {
-      expense = (expenseData.Vacation += expense.amount);
-    }
-    if (expense.category_id === 10) {
-      expense = (expenseData.Miscellaneous += expense.amount);
-    }
-  })
+    }];
+
+    this.state.expenses.map((expense) => {
+      if (expense.category_id === 1) {
+        expenseData[0].Rent += expense.amount
+      }
+      if (expense.category_id === 2) {
+        expenseData[0].Mortgage += expense.amount
+      }
+      if (expense.category_id === 3) {
+        expenseData[0].Loans += expense.amount
+      }
+      if (expense.category_id === 4) {
+        expenseData[0].Utilities += expense.amount
+      }
+      if (expense.category_id === 5) {
+        expenseData[0].Restaurants += expense.amount
+      }
+      if (expense.category_id === 6) {
+        expenseData[0].Groceries += expense.amount
+      }
+      if (expense.category_id === 7) {
+        expenseData[0].Entertainment += expense.amount
+      }
+      if (expense.category_id === 8) {
+        expenseData[0].Travel += expense.amount
+      }
+      if (expense.category_id === 9) {
+        expenseData[0].Vacation += expense.amount
+      }
+      if (expense.category_id === 10) {
+        expenseData[0].Miscellaneous += expense.amount
+      }
+      return expenseData[0];
+    })
+    console.log(expenseData[0])
+
     this.setState({
       pieChartData:{
-        // labels: ['a','b','c','d','e','f','g','h'],
         labels: categoryData,
         datasets:[
           {
             label:'Category',
-            data: expenseData[0],
+            data: [
+            expenseData[0].Rent,
+            expenseData[0].Mortgage,
+            expenseData[0].Loans,
+            expenseData[0].Utilities,
+            expenseData[0].Restaurants,
+            expenseData[0].Groceries,
+            expenseData[0].Entertainment,
+            expenseData[0].Travel,
+            expenseData[0].Vacation,
+            expenseData[0].Miscellaneous
+            ],
             backgroundColor:[
               'rgba(255, 99, 132, 0.6)',
               'rgba(54, 162, 235, 0.6)',
@@ -251,3 +266,38 @@ class App extends Component {
 }
 
 export default App;
+
+
+  // this.state.expenses.forEach((expense) => {
+  //   if (expense.category_id === 1) {
+  //     expenseData.Rent = expenseData.Rent += expense.amount
+  //   }
+  //   if (expense.category_id === 2) {
+  //     expenseData.Mortgage = expenseData.Mortgage +=expense.amount
+  //   }
+  //   if (expense.category_id === 3) {
+  //     expenseData.Loans = expenseData.Loans += expense.amount
+  //   }
+  //   if (expense.category_id === 4) {
+  //     expenseData.Utilities = expenseData.Utilities +=expense.amount
+  //   }
+  //   if (expense.category_id === 5) {
+  //     expenseData.Restaurants = expenseData.Restaurants += expense.amount
+  //   }
+  //   if (expense.category_id === 6) {
+  //     expenseData.Groceries = expenseData.Groceries += expense.amount
+  //   }
+  //   if (expense.category_id === 7) {
+  //     expenseData.Entertainment = expenseData.Entertainment += expense.amount
+  //   }
+  //   if (expense.category_id === 8) {
+  //     expenseData.Travel += expenseData.Travel += expense.amount
+  //   }
+  //   if (expense.category_id === 9) {
+  //     expenseData.Vacation = expenseData.Vacation += expense.amount
+  //   }
+  //   if (expense.category_id === 10) {
+  //     expenseData.Miscellaneous = expenseData.Miscellaneous += expense.amount
+  //   }
+
+  // })
