@@ -22,8 +22,8 @@ class App extends Component {
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseDelete = this.expenseDelete.bind(this);
     this.expenseEdit = this.expenseEdit.bind(this);
-    this.getPChartData = this.getPChartData.bind(this);
-    this.getBChartData = this.getBChartData.bind(this);
+    // this.getPChartData = this.getPChartData.bind(this);
+    // this.getBChartData = this.getBChartData.bind(this);
   }
 
   // Fetch passwords after first mount
@@ -41,9 +41,14 @@ class App extends Component {
           categories: res.data.categories
         });
       })
+      // .then(res => {
+      //   this.getPChartData();
+      //   this.getBChartData();
+      // })
       .catch(err => console.log(err));
   }
 
+//when getting PChart and BChart Data I originally thought I had to run both get methods in categories and expenses but we actually dont have too. once expenses are fetched after categories we can run the get methods because at that point we have access to both data tables after the second fetch.
   getExpenses() {
     fetch('/api/expenses')
       .then(res => res.json())
@@ -52,6 +57,10 @@ class App extends Component {
           expenses: res.data.expenses,
           dataLoaded: true
         });
+      })
+      .then(res => {
+        this.getPChartData();
+        this.getBChartData();
       })
       .catch(err => console.log(err));
   }
@@ -325,8 +334,8 @@ class App extends Component {
                 path='/reports'
                 render={props => <Reports {...props}
                   pieChartData={this.state.pieChartData}
-                  getPChartData={this.getPChartData}
-                  getBChartData={this.getBChartData}
+                  // getPChartData={this.getPChartData}
+                  // getBChartData={this.getBChartData}
                   barChartData={this.state.barChartData}
                   expenses={this.state.expenses}
                   categories={this.state.categories}
