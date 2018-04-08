@@ -1,0 +1,18 @@
+.header {
+  display: grid;
+  grid-row: 100px 50px;
+  align-self: stretch;
+  background-color: #15fbcc;
+  padding-top: 30px;
+}
+
+.nav a {
+  color: #413E3E;
+  text-decoration: none;
+}
+
+.nav {
+  justify-self: center;
+  align-self: center;
+  color: #413E3E;
+}

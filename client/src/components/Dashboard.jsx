@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FormModal from './FormModal';
+import { Button } from 'reactstrap';
 import './Dashboard.css';
 
 class Dashboard extends Component {
@@ -57,37 +58,34 @@ class Dashboard extends Component {
         />
 
         <div className="dashboard expense-container">
-          <div>
-            <p className="expense-block-title">Expenses</p>
-            <div className="expense-block-subtitle">
-              <p>Description</p>
-              <p>Amount</p>
-              <p>Date</p>
-              <p>Category</p>
+          <h2 className="expense-block-title">Expenses</h2>
+        {this.props.expenses.map((expense, i) => (
+          <div key={expense.expense_id} className="expense-block">
+            <p className="expense-table-align">{expense.expense_date.slice(0, 10).split("-")[1]}/{expense.expense_date.slice(0, 10).split("-")[2]}/{expense.expense_date.slice(0, 10).split("-")[1]}</p>
+            <div className="expense-description expense-table-align">
+              <h3>{expense.description}</h3>
+              <p>{expense.category}</p>
+            </div>
+            <p className="expense-table-align">${expense.amount}</p>
+
+            <div className="button-block">
+              <Button
+                className="button"
+                color="link"
+                onClick={() => {
+                  this.handleEdit(expense.expense_id, expense.description, expense.amount, expense.category_id, expense.expense_date)
+                }}
+              ><i className="fas fa-edit"></i></Button>
+              <Button
+                className="button"
+                color="link"
+                onClick={() => {
+                  this.handleDelete(expense.expense_id)
+                }}
+              ><i className="fas fa-trash-alt"></i></Button>
             </div>
           </div>
-          {this.props.expenses.map((expense, i) => (
-            <div key={expense.expense_id} className="expense-block">
-              <p className="expense-description">{expense.description}</p>
-              <p>${expense.amount}</p>
-              <p>{expense.expense_date.slice(0, 10)}</p>
-              <p>{expense.category}</p>
-              <div>
-                <button
-                  className="edit-btn"
-                  onClick={() => {
-                    this.handleEdit(expense.expense_id, expense.description, expense.amount, expense.category_id, expense.expense_date)
-                  }}
-                ><i className="fas fa-edit"></i></button>
-                <button
-                  className="delete-btn"
-                  onClick={() => {
-                    this.handleDelete(expense.expense_id)
-                  }}
-                ><i className="fas fa-trash-alt"></i></button>
-              </div>
-            </div>
-          ))}
+        ))}
         </div>
       </div>
     )

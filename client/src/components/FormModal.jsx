@@ -6,9 +6,15 @@ import './FormModal.css';
 const FormModal = (props) => {
   return (
     <div>
-      <Button color="secondary" onClick={() => {
-        props.toggle()
-      }}>Launch Modal</Button>
+
+  {/* floating add button */}
+      <a href="#" className="float" onClick={() => {
+              props.toggle()
+            }}>
+       <i className="fa fa-plus my-float"></i>
+      </a>
+
+ {/* Show or hide modal on button */}
       <Modal
         isOpen={props.modal}
         toggle={() => {

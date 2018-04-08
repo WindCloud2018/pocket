@@ -10,7 +10,7 @@ CREATE TABLE categories (
 
 CREATE TABLE expenses (
   expense_id SERIAL PRIMARY KEY,
-  amount INT NOT NULL,
+  amount REAL NOT NULL,
   description VARCHAR(128) NOT NULL,
   category_id INT NOT NULL REFERENCES categories(category_id),
   expense_date TIMESTAMP NOT NULL DEFAULT NOW()
