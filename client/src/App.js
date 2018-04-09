@@ -16,20 +16,32 @@ class App extends Component {
       categories: null,
       dataLoaded: false,
       pieChartData: {},
-      barChartData: {}
+      barChartData: {},
+      currentMonth: '01'
     }
     this.getExpenses = this.getExpenses.bind(this);
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseDelete = this.expenseDelete.bind(this);
     this.expenseEdit = this.expenseEdit.bind(this);
-    // this.getPChartData = this.getPChartData.bind(this);
-    // this.getBChartData = this.getBChartData.bind(this);
+    this.handleSelectCall = this.handleSelectCall.bind(this);
+    this.getCurrentMonth = this.getCurrentMonth.bind(this);
   }
 
   // Fetch passwords after first mount
   componentDidMount() {
     this.getCategories();
     this.getExpenses();
+    this.getCurrentMonth();
+  }
+
+  getCurrentMonth() {
+    const current = new Date().getMonth();
+    const newCurrent = ('0' + (current + 1).toString());
+    console.log(newCurrent, 'HEY! THIS IS THE NEW CONVERTED DATE DO YOU SEE THIS? im at app.js!')
+    this.setState({
+      currentMonth: newCurrent
+    });
+    console.log(this.state.currentMonth, 'this is coming from state do you see me?')
   }
 
 
@@ -41,14 +53,10 @@ class App extends Component {
           categories: res.data.categories
         });
       })
-      // .then(res => {
-      //   this.getPChartData();
-      //   this.getBChartData();
-      // })
       .catch(err => console.log(err));
   }
 
-//when getting PChart and BChart Data I originally thought I had to run both get methods in categories and expenses but we actually dont have too. once expenses are fetched after categories we can run the get methods because at that point we have access to both data tables after the second fetch.
+//when getting PChart and BChart Data I originally thought I had to run both get methods in categories and expenses but we actually dont have too. Once second fetch is committed this will run the getCharts methods and our setState of chartData will be initiated.
   getExpenses() {
     fetch('/api/expenses')
       .then(res => res.json())
@@ -109,9 +117,13 @@ class App extends Component {
     });
   }
 
+  handleSelectCall(e){
+    this.setState({
 
-    getPChartData(){
-  // const categoryData = ['','','','']
+    })
+  }
+
+  getPChartData(){
   const categoryData = [];
   this.state.categories.map((category) => {
     categoryData.push(category.category);
@@ -133,7 +145,8 @@ class App extends Component {
     }];
 
     this.state.expenses.map((expense) => {
-      if (expense.category_id === 1) {
+      const currM = this.state.currentMonth;
+      if ( expense.category_id === 1) {
         expenseData[0].Rent += expense.amount
       }
       if (expense.category_id === 2) {
@@ -205,14 +218,8 @@ class App extends Component {
 
     //tried to dynamically render dates from data base but realized if user doesnt track expenses that month then app will just leave it blank no need to do it dynamically. whats important is to be able to group all the expenses to their related months and years.
 
-    // this.state.expenses.map((expense, i) => {
-    //   const extract = expense.expense_date.slice(0,7).split('-');
-    //   if (extract[1] !== -1) {
-    //     dates.push(extract[1])
-    //   }
-    // })
     getBChartData(){
-    const dates = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const dates = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
     const monthlyExpense = [{
       'Jan': 0,
@@ -230,33 +237,33 @@ class App extends Component {
     }]
 
     this.state.expenses.map((expense) => {
-      const dbMonth = expense.expense_date.slice(6,7); console.log(dbMonth)
+      const dbMonth = expense.expense_date.slice(5,7); console.log(dbMonth, 'this is sliced expense dates to display months')
         // console.log(months[0].Apr += expense.amount)
-      if (dbMonth === '1') {
+      if (dbMonth === '01') {
         monthlyExpense[0].Jan += expense.amount
       }
-       if (dbMonth === '2') {
+       if (dbMonth === '02') {
         monthlyExpense[0].Feb += expense.amount
       }
-       if (dbMonth === '3') {
+       if (dbMonth === '03') {
         monthlyExpense[0].Mar += expense.amount
       }
-       if (dbMonth === '4') {
+       if (dbMonth === '04') {
         monthlyExpense[0].Apr += expense.amount
       }
-       if (dbMonth === '5') {
+       if (dbMonth === '05') {
         monthlyExpense[0].May += expense.amount
       }
-       if (dbMonth === '6') {
+       if (dbMonth === '06') {
         monthlyExpense[0].Jun += expense.amount
       }
-       if (dbMonth === '7') {
+       if (dbMonth === '07') {
         monthlyExpense[0].Jul+= expense.amount
       }
-       if (dbMonth === '8') {
+       if (dbMonth === '08') {
         monthlyExpense[0].Aug += expense.amount
       }
-       if (dbMonth === '9') {
+       if (dbMonth === '09') {
         monthlyExpense[0].Sep += expense.amount
       }
        if (dbMonth === '10') {
@@ -293,16 +300,18 @@ class App extends Component {
               monthlyExpense[0].Dec
             ],
             backgroundColor:[
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'green',
-              'blue',
-              'orange',
-              'grey',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
+              'rgba(24, 108, 205, 0.6)',
             ]
           }
         ]
@@ -339,6 +348,7 @@ class App extends Component {
                   barChartData={this.state.barChartData}
                   expenses={this.state.expenses}
                   categories={this.state.categories}
+                  handleSelectCall={this.handleSelectCall}
                 />}
               />
             </Switch>
