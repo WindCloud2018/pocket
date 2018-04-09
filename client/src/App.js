@@ -12,19 +12,18 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      currentMonth: '',
       expenses: null,
       categories: null,
       dataLoaded: false,
       pieChartData: {},
-      barChartData: {},
-      currentMonth: '01'
+      barChartData: {}
     }
     this.getExpenses = this.getExpenses.bind(this);
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseDelete = this.expenseDelete.bind(this);
     this.expenseEdit = this.expenseEdit.bind(this);
     this.handleSelectCall = this.handleSelectCall.bind(this);
-    this.getCurrentMonth = this.getCurrentMonth.bind(this);
   }
 
   // Fetch passwords after first mount
@@ -34,14 +33,16 @@ class App extends Component {
     this.getCurrentMonth();
   }
 
+
   getCurrentMonth() {
     const current = new Date().getMonth();
-    const newCurrent = ('0' + (current + 1).toString());
-    console.log(newCurrent, 'HEY! THIS IS THE NEW CONVERTED DATE DO YOU SEE THIS? im at app.js!')
-    this.setState({
-      currentMonth: newCurrent
-    });
-    console.log(this.state.currentMonth, 'this is coming from state do you see me?')
+    console.log(current, 'this is current date need to add 1 and a 0 before because jan is index 0 and original dates have 0 in front of them')
+    const newCurrent = ('0' + (current + 1));
+    console.log(newCurrent, 'this is converted DATE with PLUS ONE')
+      this.setState({
+        currentMonth: newCurrent
+      });
+    console.log(this.state.currentMonth, 'this is coming from state how come you do not see me?')
   }
 
 
@@ -343,8 +344,6 @@ class App extends Component {
                 path='/reports'
                 render={props => <Reports {...props}
                   pieChartData={this.state.pieChartData}
-                  // getPChartData={this.getPChartData}
-                  // getBChartData={this.getBChartData}
                   barChartData={this.state.barChartData}
                   expenses={this.state.expenses}
                   categories={this.state.categories}

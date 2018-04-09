@@ -6,39 +6,26 @@ class MonthTab extends React.Component {
     super(props);
     this.state = {
       months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-      thisMonth: ''
     }
-    // this.getCurrentMonth = this.getCurrentMonth.bind(this);
   }
 
-  // componentDidMount(){
-  //   console.log(this.props.expenses, 'reports expenses went through');
-  //   console.log(this.getCurrentDate, 'current date went through')
-  //   this.getCurrentMonth();
-  // }
+
 
   // handleSelectChange(e){
   //   this.props.handleSelectCall();
   // }
 
-  getCurrentMonth() {
-    const currentMonth = new Date().toDateString().slice(3,7);
-    this.setState({
-      thisMonth: currentMonth
-    })
-  }
 
 
   render(){
-    // const date = new Date().toDateString();
-    const date = new Date().getMonth();
+    const date = new Date().toDateString();
     return(
       <div>
         <div>
-          <h1> {date + 1} </h1>
+          <h1> {date} </h1>
         </div>
         <form>
-          <select
+          <select key={this.props.expenses.expense_id}
                   value={this.state.month}
                   onChange={this.handleSelectChange}
           >
