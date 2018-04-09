@@ -1,27 +1,47 @@
+.dashboard {
+  margin-bottom: 60px;
+}
+
 .expense-container {
-  border: 5px solid black;
+
 }
 
 .expense-block-title {
-
-}
-
-.expense-block-subtitle {
-  border-top: 3px solid gray;
-  border-bottom: 3px solid gray;
-  display: grid;
-  grid-template-columns: auto 80px 100px 120px 45px;
+  padding: 20px 0px;
+  margin-bottom: 0px;
+  background-color: #c7d4cb;
 }
 
 .expense-block {
-  border-bottom: 1px solid gray;
+  padding-top: 15px;
+  padding-left: 15px;
   display: grid;
-  grid-template-columns: auto 80px 100px 120px 45px;
-  margin-top: 16px;
+  grid-template-columns: 100px auto 100px 50px;
+  grid-template-rows: 90px;
+  grid-column-gap: 10px;
+}
+
+.expense-container .expense-block:nth-child(odd) {
+  background-color: #fffff0;
+}
+
+.expense-container .expense-block:nth-child(even) {
+  background-color: #baffb5;
 }
 
 .expense-description {
-  text-align: left;
-  padding-left: 16px;
 }
 
+.expense-table-align {
+  align-self: center;
+  text-align: left;
+}
+
+.button-block {
+  justify-self: center;
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+}

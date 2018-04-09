@@ -4,7 +4,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: ivory;
+  background-color: #c7d4cb;
+  color: #413E3E;
 }
 
 .header {
@@ -25,8 +26,8 @@ body {
 
 .App {
   display: grid;
-  grid-template-columns: 90px 120px auto 120px 90px;
-  grid-template-rows:  80px auto 80px;
+  grid-template-columns: 10% 120px auto 120px 10%;
+  grid-template-rows:  150px auto 200px;
   grid-template-areas:
     "header header header header header"
     ". body-container body-container body-container ."
