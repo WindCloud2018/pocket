@@ -13,6 +13,8 @@ class App extends Component {
     super();
     this.state = {
       currentMonth: '',
+      currentYear: '',
+      currentDate: '',
       expenses: null,
       categories: null,
       dataLoaded: false,
@@ -32,6 +34,7 @@ class App extends Component {
     this.getExpenses();
     this.getCurrentMonth();
     this.getCurrentYear();
+    this.getCurrentDate();
   }
 
 
@@ -42,8 +45,7 @@ class App extends Component {
     if (newCurrent < 10) {
       newCurrent = '0' + newCurrent;
     }
-    console.log(newCurrent, "YOOOOOO")
-
+    console.log(newCurrent, "YOOOOOO THIS IS CURRENT MONTH")
     this.setState({
       currentMonth: newCurrent
     });
@@ -53,9 +55,24 @@ class App extends Component {
   getCurrentYear(){
     const currYear = new Date().getFullYear().toString();
     console.log(currYear, 'YOOOOO THIS IS THE CURRENT YEAR')
+    this.setState({
+      currentYear: currYear
+    })
   }
 
-
+ getCurrentDate(){
+    const currYear = new Date().getFullYear().toString();
+    const current = new Date().getMonth();
+    let newCurrent = current + 1
+    if (newCurrent < 10) {
+      newCurrent = '0' + newCurrent;
+    }
+    const totalDate = currYear + newCurrent;
+    console.log(totalDate, "Yoooooo this is the current date you see it??");
+    this.setState({
+      currentDate: totalDate
+    })
+  }
 
 
   getCategories() {
@@ -159,39 +176,40 @@ class App extends Component {
       'Vacation': 0,
       'Miscellaneous': 0
     };
-
+    //changed date to to months with its year so we can separate the information between years.
     this.state.expenses.map((expense) => {
-      const currM = this.state.currentMonth;
-      const dbM = expense.expense_date.slice(5,7);
-      console.log(dbM, 'this is the sliced month in db')
-      if (currM === dbM && expense.category_id === 1) {
+      const currDate = this.state.currentYear + this.state.currentMonth;
+      const dbDate = expense.expense_date.slice(0,7).split('-');
+      const combineDb = dbDate[0] + dbDate[1];
+      console.log(combineDb, "CHECK THIS OUT THE COMBINATION OF YEAR AND MONTH")
+      if (currDate === combineDb && expense.category_id === 1) {
         expenseData.Rent += expense.amount
       }
-      if (currM === dbM && expense.category_id === 2) {
+      if (currDate === combineDb && expense.category_id === 2) {
         expenseData.Mortgage += expense.amount
       }
-      if (currM === dbM && expense.category_id === 3) {
+      if (currDate === combineDb && expense.category_id === 3) {
         expenseData.Loans += expense.amount
       }
-      if (currM === dbM && expense.category_id === 4) {
+      if (currDate === combineDb && expense.category_id === 4) {
         expenseData.Utilities += expense.amount
       }
-      if (currM === dbM && expense.category_id === 5) {
+      if (currDate === combineDb && expense.category_id === 5) {
         expenseData.Restaurants += expense.amount
       }
-      if (currM === dbM && expense.category_id === 6) {
+      if (currDate === combineDb && expense.category_id === 6) {
         expenseData.Groceries += expense.amount
       }
-      if (currM === dbM && expense.category_id === 7) {
+      if (currDate === combineDb && expense.category_id === 7) {
         expenseData.Entertainment += expense.amount
       }
-      if (currM === dbM && expense.category_id === 8) {
+      if (currDate === combineDb && expense.category_id === 8) {
         expenseData.Travel += expense.amount
       }
-      if (currM === dbM && expense.category_id === 9) {
+      if (currDate === combineDb && expense.category_id === 9) {
         expenseData.Vacation += expense.amount
       }
-      if (currM === dbM && expense.category_id === 10) {
+      if (currDate === combineDb && expense.category_id === 10) {
         expenseData.Miscellaneous += expense.amount
       }
       return expenseData;
