@@ -45,7 +45,7 @@ class App extends Component {
     if (newCurrent < 10) {
       newCurrent = '0' + newCurrent;
     }
-    console.log(newCurrent, "YOOOOOO THIS IS CURRENT MONTH")
+    console.log(newCurrent, "THIS IS CURRENT MONTH")
     this.setState({
       currentMonth: newCurrent
     });
@@ -54,7 +54,7 @@ class App extends Component {
   //get current year
   getCurrentYear(){
     const currYear = new Date().getFullYear().toString();
-    console.log(currYear, 'YOOOOO THIS IS THE CURRENT YEAR')
+    console.log(currYear, 'THIS IS THE CURRENT YEAR')
     this.setState({
       currentYear: currYear
     })
@@ -68,7 +68,7 @@ class App extends Component {
       newCurrent = '0' + newCurrent;
     }
     const totalDate = currYear + newCurrent;
-    console.log(totalDate, "Yoooooo this is the current date you see it??");
+    console.log(totalDate, "This is the current date you see it??");
     this.setState({
       currentDate: totalDate
     })
@@ -181,7 +181,7 @@ class App extends Component {
       const currDate = this.state.currentYear + this.state.currentMonth;
       const dbDate = expense.expense_date.slice(0,7).split('-');
       const combineDb = dbDate[0] + dbDate[1];
-      console.log(combineDb, "CHECK THIS OUT THE COMBINATION OF YEAR AND MONTH")
+
       if (currDate === combineDb && expense.category_id === 1) {
         expenseData.Rent += expense.amount
       }
@@ -273,8 +273,8 @@ class App extends Component {
     }
 
     this.state.expenses.map((expense) => {
-      const dbMonth = expense.expense_date.slice(5,7); console.log(dbMonth, 'this is sliced expense dates to display months')
-        // console.log(months[0].Apr += expense.amount)
+      const dbMonth = expense.expense_date.slice(5,7);
+
       if (dbMonth === '01') {
         monthlyExpense.Jan += expense.amount
       }

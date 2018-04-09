@@ -49,31 +49,44 @@ class MonthTab extends React.Component {
             <select key={this.props.expenses.expense_id}
                     onChange={this.handleYearChange}>
               {this.props.expenses.map((expense) => {
-                // const array = ['2015','2016'];
-                // const cur_year = expense.expense_date.slice(0,4)
+                let array = [];
+                let cur_year = expense.expense_date.slice(0,4)
 
-                // const checkExist = (cur_year, arr) => {
-                //   arr.forEach((el) => {
-                //     if (el == cur_year) {
-                //       console.log(el, 'this is the element')
-                //       console.log(cur_year, 'this is the current year do you see')
-                //       return false
-                //     } else {
-                //       return true
-                //     }
-                //   })
-                // }
-                // console.log(checkExist(cur_year, array), 'THis is checkEXIST')
-                // if (checkExist(cur_year, array)) {
-                //   array.push(cur_year);
-                // }
+                const checkExist = (cur_year, arr) => {
+                  let test = true;
+                  arr.forEach((el) => {
+                    if (el === cur_year) {
+                      console.log(el, 'this is the element')
+                      console.log(cur_year, 'this is the current year do you see')
+                      test = false
+                    } else {
+                      test = true
+                    }
+                  })
+                  return test;
+                }
+                console.log(checkExist(cur_year, array), 'THis is checkEXIST')
+                if (checkExist(cur_year, array)) {
+                  array.push(cur_year);
+                }
 
-                // console.log(array, "THIS SHOULD SHOW OUR ARRAY");
+                console.log(array, "THIS SHOULD SHOW OUR ARRAY");
 
-                // // (expense.expense_date.slice(0,4)
+                const array = [];
+                const currentYear = (expense.expense_date.slice(0,4));
+                array.push(currentYear);
+
+                const checkExist = (el, arr) => {
+                  array.forEach((el) => {
+                    if (el === curYear) {
+
+                    }
+                  })
+                }
+
 
                 return <option>
-
+                  {array}
                 </option>
               })}
             </select>
