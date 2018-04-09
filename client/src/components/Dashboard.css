@@ -1,3 +1,7 @@
+.dashboard {
+  margin-bottom: 60px;
+}
+
 .expense-container {
 
 }
@@ -5,7 +9,7 @@
 .expense-block-title {
   padding: 20px 0px;
   margin-bottom: 0px;
-  background-color: lightgray;
+  background-color: #c7d4cb;
 }
 
 .expense-block {
@@ -18,11 +22,11 @@
 }
 
 .expense-container .expense-block:nth-child(odd) {
-  background-color: ivory;
+  background-color: #fffff0;
 }
 
 .expense-container .expense-block:nth-child(even) {
-  background-color: #E8E7E7;
+  background-color: #baffb5;
 }
 
 .expense-description {

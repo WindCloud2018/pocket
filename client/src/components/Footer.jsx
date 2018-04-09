@@ -4,7 +4,16 @@ import './Footer.css';
 const Footer = () => {
   return (
     <div className="footer">
-      <h1>By WindCloud Team</h1>
+      <div className="footer-left">
+        <h4>Authors</h4>
+        <ul>
+          <li><i class="fab fa-github"></i> Carson Chen </li>
+          <li><i class="fab fa-github"></i> Nian Liu</li>
+        </ul>
+      </div>
+      <div className="footer-right">
+        Right
+      </div>
     </div>
   );
 }

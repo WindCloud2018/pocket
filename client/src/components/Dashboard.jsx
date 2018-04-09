@@ -45,7 +45,7 @@ class Dashboard extends Component {
 
   render() {
     return(
-      <div>
+      <div className="dashboard">
         <FormModal {...this.props}
           toggle={this.toggle}
           cur_expense_id={this.state.cur_expense_id}
@@ -57,13 +57,13 @@ class Dashboard extends Component {
           editing={this.state.editing}
         />
 
-        <div className="dashboard expense-container">
+        <div className="expense-container">
           <h2 className="expense-block-title">Expenses</h2>
         {this.props.expenses.map((expense, i) => (
           <div key={expense.expense_id} className="expense-block">
             <p className="expense-table-align">{expense.expense_date.slice(0, 10).split("-")[1]}/{expense.expense_date.slice(0, 10).split("-")[2]}/{expense.expense_date.slice(0, 10).split("-")[1]}</p>
             <div className="expense-description expense-table-align">
-              <h3>{expense.description}</h3>
+              <h5>{expense.description}</h5>
               <p>{expense.category}</p>
             </div>
             <p className="expense-table-align">${expense.amount}</p>

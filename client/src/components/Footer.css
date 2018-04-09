@@ -1,0 +1,23 @@
+.footer {
+  padding: 20px 0px;
+  background-color: #b5ffd5;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.footer-left {
+  text-align: left;
+  padding: 10px 0px;
+  margin-left: 25%;
+  border-right: 0.5px solid #c7d4cb;
+}
+
+.footer-right {
+  padding: 10px 0px;
+  margin-right: 25%;
+  border-left: 0.5px solid #c7d4cb;
+}
