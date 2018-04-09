@@ -9,6 +9,35 @@ class MonthTab extends React.Component {
       years: []
     }
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.getYears = this.getYears.bind(this);
+    this.checkExist = this.checkExist.bind(this);
+  }
+
+  checkExist(array, val) {
+    return array.some((arrEle) => {
+      return val === arrEle
+    })
+  }
+
+  getYears() {
+    let yearArr = [];
+    this.props.expenses.forEach((expense) => {
+      let cur_year = expense.expense_date.slice(0, 4);
+
+      if (yearArr.length === 0) {
+        yearArr.push(cur_year)
+      }
+      else if (!this.checkExist(yearArr, cur_year)) {
+        yearArr.push(cur_year)
+      }
+    })
+    this.setState({
+      years: yearArr
+    })
+  }
+
+  componentDidMount() {
+    this.getYears();
   }
 
 //e.target.value from select changes is passed into our callback function.
@@ -48,33 +77,8 @@ class MonthTab extends React.Component {
           <form>
             <select key={this.props.expenses.expense_id}
                     onChange={this.handleYearChange}>
-              {this.props.expenses.map((expense) => {
-                // const array = ['2015','2016'];
-                // const cur_year = expense.expense_date.slice(0,4)
-
-                // const checkExist = (cur_year, arr) => {
-                //   arr.forEach((el) => {
-                //     if (el == cur_year) {
-                //       console.log(el, 'this is the element')
-                //       console.log(cur_year, 'this is the current year do you see')
-                //       return false
-                //     } else {
-                //       return true
-                //     }
-                //   })
-                // }
-                // console.log(checkExist(cur_year, array), 'THis is checkEXIST')
-                // if (checkExist(cur_year, array)) {
-                //   array.push(cur_year);
-                // }
-
-                // console.log(array, "THIS SHOULD SHOW OUR ARRAY");
-
-                // // (expense.expense_date.slice(0,4)
-
-                return <option>
-
-                </option>
+              {this.state.years.map((year) => {
+                return <option>{year}</option>
               })}
             </select>
           </form>
