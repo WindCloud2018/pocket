@@ -1,35 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Pie } from 'react-chartjs-2';
+import MonthTab from './MonthTab';
 
 
-class PieChart extends Component {
+//now that we used a ".then(res)" promise after the second fetch in App.js we are able to pass down the props of pieChartData into this component and allowing us to make this component stateless.
+const PieChart = props => {
 
-componentDidMount(){
-  this.props.getPChartData();
-}
 
-render(){
   return (
-      <div className="chart">
-        <Pie
-          data={this.props.pieChartData}
-          options={{
-            // maintainAspectRatio: false
-            title:{
-              display: true,
-              text: 'Expense Amounts',
-              fontSize: 25
-            },
-            legend: {
-              display: true,
-              position: 'right'
-            }
-          }}
-          />
-      </div>
-    );
-}
-
+    <div className="chart">
+      <MonthTab {...props}/>
+      <Pie
+        data={props.pieChartData}
+        options={{
+          // maintainAspectRatio: false
+          title:{
+            display: true,
+            text: 'Expense Amounts',
+            fontSize: 25
+          },
+          legend: {
+            display: true,
+            position: 'right'
+          }
+        }}
+        />
+    </div>
+  );
 }
 
 
