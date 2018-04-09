@@ -61,7 +61,7 @@ class Dashboard extends Component {
           <h2 className="expense-block-title">Expenses</h2>
         {this.props.expenses.map((expense, i) => (
           <div key={expense.expense_id} className="expense-block">
-            <p className="expense-table-align">{expense.expense_date.slice(0, 10).split("-")[1]}/{expense.expense_date.slice(0, 10).split("-")[2]}/{expense.expense_date.slice(0, 10).split("-")[1]}</p>
+            <p className="expense-table-align">{expense.expense_date.slice(0, 10).split("-")[1]}/{expense.expense_date.slice(0, 10).split("-")[2]}/{expense.expense_date.slice(0, 10).split("-")[0]}</p>
             <div className="expense-description expense-table-align">
               <h5>{expense.description}</h5>
               <p>{expense.category}</p>

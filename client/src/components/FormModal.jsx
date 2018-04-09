@@ -11,10 +11,10 @@ const FormModal = (props) => {
       <a href="#" className="float" onClick={() => {
               props.toggle()
             }}>
-       <i className="fa fa-plus my-float"></i>
+        <i className="fa fa-plus my-float"></i>
       </a>
 
- {/* Show or hide modal on button */}
+  {/* Show or hide modal on button */}
       <Modal
         isOpen={props.modal}
         toggle={() => {
