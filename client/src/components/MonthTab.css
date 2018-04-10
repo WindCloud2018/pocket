@@ -1,0 +1,14 @@
+.selector-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.selector-container-right{
+  justify-self: start;
+  padding-left: 5px;
+}
+
+.selector-container-left{
+  justify-self: end;
+  padding-right: 5px;
+}

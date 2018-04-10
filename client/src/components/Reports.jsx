@@ -3,6 +3,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink} from 'reactstrap';
 import classnames from 'classnames';
 import PieChart from './PieChart';
 import BarChart from './BarChart';
+import './Reports.css';
 
 export default class Reports extends React.Component {
   constructor(props) {
@@ -21,9 +22,10 @@ export default class Reports extends React.Component {
       });
     }
   }
+
   render() {
     return (
-      <div>
+      <div className="reports">
         <Nav tabs>
           <NavItem>
             <NavLink

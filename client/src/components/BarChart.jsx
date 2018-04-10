@@ -11,6 +11,7 @@ const BarChart = (props) => {
           data={props.barChartData}
           options={{
             // maintainAspectRatio: false
+            // reponsive: true,
             title:{
               display: true,
               text: 'Total Montly Expenses',

@@ -14,6 +14,7 @@ const PieChart = props => {
         data={props.pieChartData}
         options={{
           // maintainAspectRatio: false
+          // reponsive: true,
           title:{
             display: true,
             text: 'Expense Amounts',

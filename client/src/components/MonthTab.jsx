@@ -1,4 +1,5 @@
 import React from 'react';
+import './MonthTab';
 
 
 class MonthTab extends React.Component {
@@ -52,13 +53,8 @@ class MonthTab extends React.Component {
   const date = new Date().toDateString();
 
     return(
-      <div>
-        <div>
-          <h1> {date} </h1>
-        </div>
-
-        <div>
-        <form className="chart-selector">
+      <div className="selector-container">
+        <form className='selector-container-left'>
           <select key={this.props.expenses.expense_id}
                   value={this.props.currentMonth}
                   onChange={(e) => {this.props.handleSelectCall(e.target.value)}}>
@@ -77,10 +73,7 @@ class MonthTab extends React.Component {
           }
           </select>
         </form>
-        </div>
-
-        <div>
-          <form className="chart-selector">
+          <form className="selector-container-right">
             <select key={this.props.expenses.expense_id}
                     value={this.props.currentYear}
                     onChange={(e) => {
@@ -94,7 +87,6 @@ class MonthTab extends React.Component {
               })}
             </select>
           </form>
-        </div>
       </div>
     );
   }
