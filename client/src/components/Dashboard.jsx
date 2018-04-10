@@ -59,7 +59,7 @@ class Dashboard extends Component {
         />
 
         <div className="expense-container">
-          <h2 className="expense-block-title">Test</h2>
+          <h2 className="expense-block-title">Expense</h2>
         {this.props.expenses.map((expense, i) => (
           <div key={expense.expense_id} className="expense-block">
             <img className="expense-table-align-icon" src={window.location.origin + '/img/' + expense.category + '.png' } alt={expense.category} />
