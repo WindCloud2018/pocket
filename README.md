@@ -2,7 +2,7 @@
 
 Visualize personal finance.
 
-##[Live Demo] (https://pocket-windcloud.herokuapp.com/)
+[Live Demo](https://pocket-windcloud.herokuapp.com/)
 
 ### How to get start
 * Run following commend to install Express server dependencies:
