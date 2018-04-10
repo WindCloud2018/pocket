@@ -37,6 +37,11 @@
   text-align: left;
 }
 
+.expense-table-align-icon {
+  justify-self: center;
+  align-self: center;
+}
+
 .button-block {
   justify-self: center;
 }
