@@ -13,7 +13,8 @@ class Dashboard extends Component {
       cur_category_id: 1,
       cur_expense_date: '',
       modal: false,
-      editing: false
+      editing: false,
+      winWid: window.innerWidth
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
@@ -58,7 +59,7 @@ class Dashboard extends Component {
         />
 
         <div className="expense-container">
-          <h2 className="expense-block-title">Expenses</h2>
+          <h2 className="expense-block-title">Test</h2>
         {this.props.expenses.map((expense, i) => (
           <div key={expense.expense_id} className="expense-block">
             <img className="expense-table-align-icon" src={window.location.origin + '/img/' + expense.category + '.png' } alt={expense.category} />
