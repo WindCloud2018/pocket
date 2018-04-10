@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="footer">
 
       <div className="footer-top">
-        <a href="https://github.com/WindCloud2018/pocket" ><i class="fab fa-github-square fa-3x"></i></a>
+        <a href="https://github.com/WindCloud2018/pocket" ><i className="fab fa-github-square fa-3x"></i></a>
       </div>
 
       <div className="footer-bottom">
