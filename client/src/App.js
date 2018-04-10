@@ -14,7 +14,6 @@ class App extends Component {
     this.state = {
       currentMonth: '',
       currentYear: '',
-      currentDate: '',
       expenses: null,
       categories: null,
       dataLoaded: false,
@@ -26,6 +25,7 @@ class App extends Component {
     this.expenseDelete = this.expenseDelete.bind(this);
     this.expenseEdit = this.expenseEdit.bind(this);
     this.handleSelectCall = this.handleSelectCall.bind(this);
+    this.handleSelectYearCall = this.handleSelectYearCall.bind(this);
   }
 
   // Fetch passwords after first mount
@@ -34,7 +34,6 @@ class App extends Component {
     this.getExpenses();
     this.getCurrentMonth();
     this.getCurrentYear();
-    this.getCurrentDate();
   }
 
 
@@ -45,7 +44,6 @@ class App extends Component {
     if (newCurrent < 10) {
       newCurrent = '0' + newCurrent;
     }
-    console.log(newCurrent, "YOOOOOO THIS IS CURRENT MONTH")
     this.setState({
       currentMonth: newCurrent
     });
@@ -54,23 +52,8 @@ class App extends Component {
   //get current year
   getCurrentYear(){
     const currYear = new Date().getFullYear().toString();
-    console.log(currYear, 'YOOOOO THIS IS THE CURRENT YEAR')
     this.setState({
       currentYear: currYear
-    })
-  }
-
- getCurrentDate(){
-    const currYear = new Date().getFullYear().toString();
-    const current = new Date().getMonth();
-    let newCurrent = current + 1
-    if (newCurrent < 10) {
-      newCurrent = '0' + newCurrent;
-    }
-    const totalDate = currYear + newCurrent;
-    console.log(totalDate, "Yoooooo this is the current date you see it??");
-    this.setState({
-      currentDate: totalDate
     })
   }
 
@@ -86,7 +69,7 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-//when getting PChart and BChart Data I originally thought I had to run both get methods in categories and expenses but we actually dont have too. Once second fetch is committed this will run the getCharts methods and our setState of chartData will be initiated.
+//after getting expenses data get P chart and B chart Data
   getExpenses() {
     fetch('/api/expenses')
       .then(res => res.json())
@@ -152,6 +135,16 @@ class App extends Component {
       currentMonth: value
     }, () => {
       this.getPChartData();
+      this.getBChartData();
+    })
+  }
+
+  handleSelectYearCall(value) {
+    this.setState({
+      currentYear: value
+    }, () => {
+      this.getPChartData();
+      this.getBChartData();
     })
   }
 
@@ -162,7 +155,6 @@ class App extends Component {
     categoryData.push(category.category);
     return categoryData;
   })
-  console.log(categoryData);
 
   const expenseData = {
       'Rent': 0,
@@ -180,8 +172,8 @@ class App extends Component {
     this.state.expenses.map((expense) => {
       const currDate = this.state.currentYear + this.state.currentMonth;
       const dbDate = expense.expense_date.slice(0,7).split('-');
-      const combineDb = dbDate[0] + dbDate[1];
-      console.log(combineDb, "CHECK THIS OUT THE COMBINATION OF YEAR AND MONTH")
+      const combineDb = dbDate[0] + dbDate[1] + '';
+
       if (currDate === combineDb && expense.category_id === 1) {
         expenseData.Rent += expense.amount
       }
@@ -214,7 +206,6 @@ class App extends Component {
       }
       return expenseData;
     })
-    console.log(expenseData)
 
     this.setState({
       pieChartData:{
@@ -252,8 +243,6 @@ class App extends Component {
     });
   };
 
-
-
     getBChartData(){
     const dates = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
@@ -272,48 +261,50 @@ class App extends Component {
       'Dec': 0
     }
 
+
     this.state.expenses.map((expense) => {
-      const dbMonth = expense.expense_date.slice(5,7); console.log(dbMonth, 'this is sliced expense dates to display months')
-        // console.log(months[0].Apr += expense.amount)
-      if (dbMonth === '01') {
+      const dbMonth = expense.expense_date.slice(5,7);
+      const dbYear = expense.expense_date.slice(0,4);
+      const currYear = this.state.currentYear;
+
+      if (dbYear === currYear && dbMonth === '01') {
         monthlyExpense.Jan += expense.amount
       }
-       if (dbMonth === '02') {
+       if (dbYear === currYear && dbMonth === '02') {
         monthlyExpense.Feb += expense.amount
       }
-       if (dbMonth === '03') {
+       if (dbYear === currYear && dbMonth === '03') {
         monthlyExpense.Mar += expense.amount
       }
-       if (dbMonth === '04') {
+       if (dbYear === currYear && dbMonth === '04') {
         monthlyExpense.Apr += expense.amount
       }
-       if (dbMonth === '05') {
+       if (dbYear === currYear && dbMonth === '05') {
         monthlyExpense.May += expense.amount
       }
-       if (dbMonth === '06') {
+       if (dbYear === currYear && dbMonth === '06') {
         monthlyExpense.Jun += expense.amount
       }
-       if (dbMonth === '07') {
+       if (dbYear === currYear && dbMonth === '07') {
         monthlyExpense.Jul+= expense.amount
       }
-       if (dbMonth === '08') {
+       if (dbYear === currYear && dbMonth === '08') {
         monthlyExpense.Aug += expense.amount
       }
-       if (dbMonth === '09') {
+       if (dbYear === currYear && dbMonth === '09') {
         monthlyExpense.Sep += expense.amount
       }
-       if (dbMonth === '10') {
+       if (dbYear === currYear && dbMonth === '10') {
         monthlyExpense.Oct += expense.amount
       }
-       if (dbMonth === '11') {
+       if (dbYear === currYear && dbMonth === '11') {
         monthlyExpense.Nov += expense.amount
       }
-       if (dbMonth === '12') {
+       if (dbYear === currYear && dbMonth === '12') {
         monthlyExpense.Dec += expense.amount
       }
       return monthlyExpense;
     });
-    console.log(monthlyExpense);
 
     this.setState({
       barChartData: {
@@ -383,6 +374,9 @@ class App extends Component {
                   expenses={this.state.expenses}
                   categories={this.state.categories}
                   handleSelectCall={this.handleSelectCall}
+                  handleSelectYearCall={this.handleSelectYearCall}
+                  currentYear={this.state.currentYear}
+                  currentMonth={this.state.currentMonth}
                 />}
               />
             </Switch>
