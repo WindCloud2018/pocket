@@ -50,7 +50,7 @@ class MonthTab extends React.Component {
 
 
   render(){
-  const date = new Date().toDateString();
+  // const date = new Date().toDateString();
 
     return(
       <div className="selector-container">
