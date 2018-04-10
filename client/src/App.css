@@ -1,7 +1,6 @@
 @import "./components/Header.css";
 @import "./components/Footer.css";
 @import "./components/Dashboard.css";
-@import "./components/MonthTab.css";
 
 body {
   font-family: 'Roboto', sans-serif;

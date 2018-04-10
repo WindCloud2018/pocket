@@ -41,7 +41,7 @@ class YearTab extends React.Component {
 
   render(){
     return(
-      <div>
+      <div className="year-select-container">
         <form>
           <select value={this.props.currentYear}
                   onChange={(e) => {

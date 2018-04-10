@@ -1,5 +1,5 @@
 import React from 'react';
-import './MonthTab';
+import './MonthTab.css';
 
 
 class MonthTab extends React.Component {
