@@ -22,7 +22,7 @@ const PieChart = props => {
           },
           legend: {
             display: true,
-            position: 'right'
+            position: 'bottom'
           }
         }}
         />

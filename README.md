@@ -76,6 +76,12 @@ heroku pg:push localdatabase DATABASE/HEROKU_DATABASE_NAME
 * [create-react-app](https://github.com/facebook/create-react-app) - React Starter Pack.
 * [Heroku](https://devcenter.heroku.com/) - Deployment platform and documentations
 
+## Upcoming Features
+
+* User Authentication Login
+* Summary filter for month and year with search function
+* 
+
 ## Authors
 
 * **Carson Chen** (https://github.com/carsoncychen)
