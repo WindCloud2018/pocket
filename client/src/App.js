@@ -156,54 +156,67 @@ class App extends Component {
     return categoryData;
   })
 
-  const expenseData = {
-      'Rent': 0,
-      'Mortgage': 0,
-      'Loans': 0,
-      'Utilities': 0,
-      'Restaurants': 0,
-      'Groceries': 0,
-      'Entertainment': 0,
-      'Travel': 0,
-      'Vacation': 0,
-      'Miscellaneous': 0
-    };
+  // const expenseData = {
+  //     'Rent': 0,
+  //     'Mortgage': 0,
+  //     'Loans': 0,
+  //     'Utilities': 0,
+  //     'Restaurants': 0,
+  //     'Groceries': 0,
+  //     'Entertainment': 0,
+  //     'Travel': 0,
+  //     'Vacation': 0,
+  //     'Miscellaneous': 0
+  //   };
+
+    const expenseData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
     //changed date to to months with its year so we can separate the information between years.
-    this.state.expenses.map((expense) => {
+    this.state.expenses.map((expense, i) => {
       const currDate = this.state.currentYear + this.state.currentMonth;
       const dbDate = expense.expense_date.slice(0,7).split('-');
+
+      //combinedDB adds month and year together creating total month and year. and if total month and year is the same as expense year and date then we push.
       const combineDb = dbDate[0] + dbDate[1] + '';
 
-      if (currDate === combineDb && expense.category_id === 1) {
-        expenseData.Rent += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 2) {
-        expenseData.Mortgage += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 3) {
-        expenseData.Loans += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 4) {
-        expenseData.Utilities += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 5) {
-        expenseData.Restaurants += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 6) {
-        expenseData.Groceries += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 7) {
-        expenseData.Entertainment += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 8) {
-        expenseData.Travel += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 9) {
-        expenseData.Vacation += expense.amount
-      }
-      if (currDate === combineDb && expense.category_id === 10) {
-        expenseData.Miscellaneous += expense.amount
-      }
+
+      expenseData.forEach((expenseSingle, i) => {
+        if (currDate === combineDb && expense.categoryid === (i + 1)) {
+          expenseSingle[i] += expense.amount
+        }
+        return expenseSingle;
+      })
+
+      // if (currDate === combineDb && expense.category_id === 1) {
+      //   expenseData.Rent += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 2) {
+      //   expenseData.Mortgage += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 3) {
+      //   expenseData.Loans += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 4) {
+      //   expenseData.Utilities += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 5) {
+      //   expenseData.Restaurants += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 6) {
+      //   expenseData.Groceries += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 7) {
+      //   expenseData.Entertainment += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 8) {
+      //   expenseData.Travel += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 9) {
+      //   expenseData.Vacation += expense.amount
+      // }
+      // if (currDate === combineDb && expense.category_id === 10) {
+      //   expenseData.Miscellaneous += expense.amount
+      // }
       return expenseData;
     })
 
@@ -213,18 +226,7 @@ class App extends Component {
         datasets:[
           {
             label:'Category',
-            data: [
-            expenseData.Rent,
-            expenseData.Mortgage,
-            expenseData.Loans,
-            expenseData.Utilities,
-            expenseData.Restaurants,
-            expenseData.Groceries,
-            expenseData.Entertainment,
-            expenseData.Travel,
-            expenseData.Vacation,
-            expenseData.Miscellaneous
-            ],
+            data: expenseData,
             backgroundColor:[
               'rgba(255, 99, 132, 0.6)',
               'rgba(54, 162, 235, 0.6)',
