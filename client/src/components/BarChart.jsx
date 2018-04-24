@@ -7,7 +7,7 @@ const BarChart = (props) => {
 
     return (
       <div className="chart">
-        <YearTab {...props}/>
+        <YearTab {...props} />
         <Bar
           data={props.barChartData}
           options={{

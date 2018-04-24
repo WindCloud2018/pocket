@@ -48,8 +48,9 @@ export default class Reports extends React.Component {
           <TabPane tabId="1">
             <PieChart {...this.props} />
           </TabPane>
+
           <TabPane tabId="2">
-          <BarChart {...this.props} />
+            <BarChart {...this.props} />
           </TabPane>
         </TabContent>
       </div>

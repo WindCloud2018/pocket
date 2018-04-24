@@ -28,10 +28,9 @@ module.exports = {
 
   save(expense) {
   // console.log('this is landmark in model:', landmarks);
-  console.log('models')
-  return db.one(`
-     INSERT INTO expenses (amount, description, category_id, expense_date) VALUES ($1, $2, $3, $4) RETURNING *
-    `, [expense.amount, expense.description, expense.category_id, expense.expense_date]);
+    return db.one(`
+       INSERT INTO expenses (amount, description, category_id, expense_date) VALUES ($1, $2, $3, $4) RETURNING *
+      `, [expense.amount, expense.description, expense.category_id, expense.expense_date]);
   },
 
   update(expense) {

@@ -28,7 +28,7 @@ module.exports = {
       amount: req.body.amount,
       description: req.body.description,
       category_id: req.body.category_id,
-      expense_date: req.body.expense_date
+      expense_date: req.body.expense_date,
     })
       .then((expense) => {
         res.json({
@@ -44,8 +44,9 @@ module.exports = {
       .then((expense) => {
         res.json({
           message: 'Expense updated',
-          data: { expense }
-        })      })
+          data: { expense },
+        });
+      })
       .catch(err => next(err));
   },
 

@@ -47,6 +47,7 @@ class Dashboard extends Component {
   render() {
     return(
       <div className="dashboard">
+
         <FormModal {...this.props}
           toggle={this.toggle}
           cur_expense_id={this.state.cur_expense_id}

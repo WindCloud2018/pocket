@@ -18,8 +18,8 @@ class App extends Component {
       categories: null,
       dataLoaded: false,
       pieChartData: {},
-      barChartData: {}
-    }
+      barChartData: {},
+    };
     this.getExpenses = this.getExpenses.bind(this);
     this.expenseCreate = this.expenseCreate.bind(this);
     this.expenseDelete = this.expenseDelete.bind(this);

@@ -8,7 +8,7 @@ const expenseController = require('../controllers/expensecontroller');
 expenseRoutes.route('/:id')
   .get(expenseController.expenseGetOne)
   .put(expenseController.expenseUpdate)
-  .delete(expenseController.expenseDestroy)
+  .delete(expenseController.expenseDestroy);
 
 expenseRoutes.route('/')
   .get(expenseController.expenseIndex)
