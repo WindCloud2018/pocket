@@ -24,7 +24,6 @@ module.exports = {
   },
 
   expenseCreate(req, res, next) {
-    console.log(req.body);
     expensesDB.save({
       amount: req.body.amount,
       description: req.body.description,
@@ -33,7 +32,7 @@ module.exports = {
     })
       .then((expense) => {
         res.json({
-          message: 'expense added successfully!',
+          message: 'Expense added successfully!',
           data: { expense },
         });
       })
@@ -41,31 +40,13 @@ module.exports = {
   },
 
   expenseUpdate(req, res, next) {
-
-    console.log(req.body, 'update controller');
     expensesDB.update(req.body)
       .then((expense) => {
-        res.locals.expense = expense;
-        next()
-      })
+        res.json({
+          message: 'Expense updated',
+          data: { expense }
+        })      })
       .catch(err => next(err));
-
-    // expensesDB.findById(req.body.expense_id)
-    //   .then((expense) => {
-    //     expensesDB.update({
-    //       amount: req.body.amount,
-    //       description: req.body.description,
-    //       category_id: req.body.category_id,
-    //       expense_date: req.body.expense_date
-    //     });
-    //   })
-    //   .then((expense) => {
-    //     res.json({
-    //       message: 'expense update success',
-    //       data: { expense },
-    //     });
-    //   })
-    //   .catch(err => next(err));
   },
 
   expenseDestroy(req, res, next) {

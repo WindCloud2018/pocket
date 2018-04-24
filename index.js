@@ -20,7 +20,7 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//testing routers with local db
+
 app.use('/api/expenses', expenseRoutes);
 
 //use for testing category route with local db
