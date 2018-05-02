@@ -172,7 +172,7 @@ class App extends Component {
     // const expenseData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     //changed date to to months with its year so we can separate the information between years.
-    this.state.expenses.map((expense, i) => {
+    this.state.expenses.map((expense) => {
       const currDate = this.state.currentYear + this.state.currentMonth;
       const dbDate = expense.expense_date.slice(0,7).split('-');
 
@@ -218,7 +218,18 @@ class App extends Component {
         datasets:[
           {
             label:'Category',
-            data: expenseData,
+            data: [
+              expenseData.Rent,
+              expenseData.Mortgage,
+              expenseData.Loans,
+              expenseData.Utilities,
+              expenseData.Restaurants,
+              expenseData.Grociers,
+              expenseData.Entertainment,
+              expenseData.Travel,
+              expenseData.Vacation,
+              expenseData.Miscellaneous
+            ],
             backgroundColor:[
               'rgba(255, 99, 132, 0.6)',
               'rgba(54, 162, 235, 0.6)',
