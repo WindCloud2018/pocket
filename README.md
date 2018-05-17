@@ -4,6 +4,10 @@ Visualize personal finance.
 
 [Live Demo](https://pocket-windcloud.herokuapp.com/)
 
+### Why build this app?
+* To create an app that we can personally use.
+* To incorporate additional features tailored to personal preference, inspired by other expense tracking app such as Mint.
+
 ### How to get start
 * Run following commend to install Express server dependencies:
 ```
