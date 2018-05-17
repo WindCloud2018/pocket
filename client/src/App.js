@@ -34,6 +34,7 @@ class App extends Component {
     this.getExpenses();
     this.getCurrentMonth();
     this.getCurrentYear();
+    console.log(this.state.expenses)
   }
 
 
@@ -74,6 +75,7 @@ class App extends Component {
     fetch('/api/expenses')
       .then(res => res.json())
       .then((res) => {
+        console.log(res)
         this.setState({
           expenses: res.data.expenses,
           dataLoaded: true

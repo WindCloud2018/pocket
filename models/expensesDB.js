@@ -8,7 +8,7 @@ module.exports = {
       FROM expenses e
       INNER JOIN categories c
       ON e.category_id = c.category_id
-      ORDER BY expense_date, expense_id ASC
+      ORDER BY expense_date DESC
     `);
   },
 
