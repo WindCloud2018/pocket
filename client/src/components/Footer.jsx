@@ -6,11 +6,11 @@ const Footer = () => {
     <div className="footer">
 
       <div className="footer-top">
-        <a href="https://github.com/WindCloud2018/pocket" ><i className="fab fa-github-square fa-3x"></i></a>
+        <a href="https://github.com/nianliu18/I-Hungry" ><i className="fab fa-github-square fa-3x"></i></a>
       </div>
 
       <div className="footer-bottom">
-        <p>By The WindCloud Team</p>
+        <p>By Nian Liu</p>
       </div>
     </div>
   );

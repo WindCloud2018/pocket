@@ -6,7 +6,7 @@ module.exports = {
     expensesDB.findAll()
       .then((expenses) => {
         res.status(200).json({
-          data: { expenses }
+          data: { expenses },
         });
       })
       .catch(err => next(err));

@@ -15,7 +15,6 @@ const Navigation = props => {
       </NavItem>
     </Nav>
   );
-
 }
 
 

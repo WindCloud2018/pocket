@@ -8,4 +8,4 @@ categoryRoutes.route('/')
   .get(categoryController.index);
 
 
-module.exports= categoryRoutes;
+module.exports = categoryRoutes;
